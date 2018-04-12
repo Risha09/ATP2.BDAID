@@ -1,0 +1,61 @@
+﻿@model ATP2.BDAID.Entities.UserInfo
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_AuthorizeLayout.cshtml";
+}
+<h2>@ViewBag.Message</h2>
+
+@if (Model.ID == 0)
+{
+    <h2>Add User Info</h2>
+}
+else
+{
+    <h2>Edit User Info</h2>
+}
+
+@using (Html.BeginForm("Save", "Host"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Contact)
+        @Html.TextBoxFor(m => m.Contact, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Contact)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UsertypeID)
+        @Html.TextBoxFor(m => m.UsertypeID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UsertypeID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender)
+        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Gender)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+    <br />
+    <button type="submit" class="btn btn-info">Save</button>
+}

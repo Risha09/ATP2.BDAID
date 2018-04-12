@@ -1,0 +1,85 @@
+﻿          
+@model List<ATP2.BDAID.Entities.UserInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AuthorizeLayout.cshtml";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm( "DetailView","Host"))
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                User Name
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Password
+            </td>
+            <td>
+                Contact
+            </td>
+            <td>
+                UserType
+            </td>
+            <td>
+               Gender
+            </td>
+            <td>
+                Age
+            </td>
+
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @user.ID
+                </td>
+                <td>
+                    @user.Name
+                </td>
+                <td>
+                    @user.Username
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Password
+                </td>
+                <td>
+                    @user.Contact
+                </td>
+                <td>
+                    @user.UsertypeID
+                </td>
+                <td>
+                    @user.Gender
+                </td>
+                <td>
+                    @user.Age
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Save", new { Controller = "Host", id = user.ID })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { Controller = "Host", id = user.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <button type="submit" class="btn btn-info">ADD</button>
+
+}

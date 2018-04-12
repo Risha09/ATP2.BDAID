@@ -1,0 +1,69 @@
+﻿@model ATP2.BDAID.Model.RegistrationModel
+@{
+    ViewBag.Title = "Registration";
+}
+
+@using (Html.BeginForm("Registration"))
+{
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Oh snap!</strong> @ViewBag.Error
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" align="center">
+            <h1 style="color: white">Registration</h1>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Contact)
+                @Html.TextBoxFor(m => m.Contact, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Contact)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Age)
+                @Html.TextBoxFor(m => m.Age, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Age)
+            </div>
+            <div class="radio">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.Gender, "Male") Male
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.Gender, "Female") Female
+                </label>
+                @Html.ValidationMessageFor(m => m.Gender)
+            </div>
+            <button type="submit" class="btn btn-default" value="Save">Save</button> <br/>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+}
+
