@@ -67,11 +67,5 @@ namespace ATP2.BDAID.Data
             OracleCommand cmd = new OracleCommand(query, Connection);
             return cmd.ExecuteNonQuery();
         }
-
-        public static int ExecuteNonQuery(string query)
-        {
-            OracleCommand cmd = new OracleCommand(query, Connection);
-            return cmd.ExecuteNonQuery();
-        }
     }
 }
