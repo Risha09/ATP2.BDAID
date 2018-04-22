@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\UserInfoDao.cs" />
-    <Compile Include="Base\BaseRepo.cs" />
+    <Compile Include="Account\UserInfoService.cs" />
+    <Compile Include="Base\BaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
