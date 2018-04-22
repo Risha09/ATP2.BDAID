@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Data;
 
-namespace ATP2.BDAID.Repo.Base
+namespace ATP2.BDAID.Services.Base
 {
-    public class BaseRepo
+    public class BaseService
     {
         private static BDAIDDbContext _context;
         public static BDAIDDbContext DbContext

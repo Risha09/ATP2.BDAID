@@ -207,9 +207,9 @@
       <Project>{3addb600-6d54-4993-be52-18626b94a741}</Project>
       <Name>ATP2.BDAID.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ATP2.BDAID.Repo\ATP2.BDAID.Repo.csproj">
+    <ProjectReference Include="..\ATP2.BDAID.Repo\ATP2.BDAID.Services.csproj">
       <Project>{79f22bca-14e8-4a31-ae36-3b391145ef91}</Project>
-      <Name>ATP2.BDAID.Repo</Name>
+      <Name>ATP2.BDAID.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\ATP2.BDAID.Web.Framework\ATP2.BDAID.Web.Framework.csproj">
       <Project>{e3e0e16e-e4b4-4753-9f94-61e3addfc915}</Project>

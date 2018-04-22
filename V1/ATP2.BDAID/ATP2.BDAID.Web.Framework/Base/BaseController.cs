@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ATP2.BDAID.Data;
-using ATP2.BDAID.Repo.Account;
+using ATP2.BDAID.Services.Account;
 
 namespace ATP2.BDAID.Web.Framework.Base
 {
@@ -22,25 +22,14 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static UserInfoRepo _userInfoRepo;
-        public static UserInfoRepo userInfoRepo
+        private static UserInfoService _userInfoService;
+        public static UserInfoService userInfoService
         {
             get
             {
-                if (_userInfoRepo == null)
-                    _userInfoRepo = new UserInfoRepo();
-                return _userInfoRepo;
-            }
-        }
-
-        private static UserInfoDao _userInfoDao;
-        public static UserInfoDao userInfoDao
-        {
-            get
-            {
-                if (_userInfoDao == null)
-                    _userInfoDao = new UserInfoDao();
-                return _userInfoDao;
+                if (_userInfoService == null)
+                    _userInfoService = new UserInfoService();
+                return _userInfoService;
             }
         }
     }

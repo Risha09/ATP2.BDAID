@@ -7,8 +7,8 @@
     <ProjectGuid>{79F22BCA-14E8-4A31-AE36-3B391145EF91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ATP2.BDAID.Repo</RootNamespace>
-    <AssemblyName>ATP2.BDAID.Repo</AssemblyName>
+    <RootNamespace>ATP2.BDAID.Services</RootNamespace>
+    <AssemblyName>ATP2.BDAID.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\UserInfoDao.cs" />
-    <Compile Include="Account\UserInfoRepo.cs" />
     <Compile Include="Base\BaseRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -19,7 +19,7 @@ namespace ATP2.BDAID.Web.Controllers
         // GET: /RegisteredUser/Host/
         public ActionResult Index()
         {
-            var userinfo = userInfoDao.GetAll();
+            var userinfo = userInfoService.GetAll();
             return View(userinfo);
         }
 
@@ -30,7 +30,7 @@ namespace ATP2.BDAID.Web.Controllers
         }
         public ActionResult Save(int id)
         {
-            var user = userInfoDao.GetByID(id).Data;
+            var user = userInfoService.GetByID(id).Data;
             return View("DetailView", user);
 
         }
@@ -44,7 +44,7 @@ namespace ATP2.BDAID.Web.Controllers
 
             try
             {
-                var result = userInfoDao.Save(userinfo);
+                var result = userInfoService.Save(userinfo);
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
@@ -60,7 +60,7 @@ namespace ATP2.BDAID.Web.Controllers
 
         public ActionResult Delete(int id)
         {
-            userInfoDao.Delete(id);
+            userInfoService.Delete(id);
             return RedirectToAction("Index");
         }
 	}

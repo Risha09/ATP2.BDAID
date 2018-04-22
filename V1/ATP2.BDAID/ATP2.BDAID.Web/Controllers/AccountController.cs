@@ -10,7 +10,6 @@ using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Object;
 using ATP2.BDAID.Model;
 using ATP2.BDAID.Model.Account;
-using ATP2.BDAID.Repo.Account;
 using ATP2.BDAID.Web.Framework.Base;
 using ATP2.BDAID.Web.Framework.Util;
 using Microsoft.Ajax.Utilities;
@@ -49,7 +48,7 @@ namespace ATP2.BDAID.Web.Controllers
                 UsertypeID = (int)EnumCollection.UserType.RegisteredUser
             };
 
-            var result = userInfoDao.Save(userinfos);
+            var result = userInfoService.Save(userinfos);
 
             if (result.HasError)
             {
@@ -82,7 +81,7 @@ namespace ATP2.BDAID.Web.Controllers
             {
                 return View(model);
             }
-            var result = userInfoDao.Login(model.Email, model.Password);
+            var result = userInfoService.Login(model.Email, model.Password);
 
             if (result.HasError)
             {
