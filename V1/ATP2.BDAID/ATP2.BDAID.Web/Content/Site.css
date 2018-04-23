@@ -40,9 +40,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
-.field-validation-error {
-    color: red;
-}
-.input-validation-error {
-    border: 1px solid red;
+
+.shadow_content {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

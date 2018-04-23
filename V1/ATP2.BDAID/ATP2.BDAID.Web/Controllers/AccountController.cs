@@ -39,13 +39,11 @@ namespace ATP2.BDAID.Web.Controllers
             var userinfos = new UserInfo()
             {
                 Name = model.Name,
-                Username = model.Username,
                 Email = model.Email,
-                Contact = model.Contact,
                 Password = model.Password,
-                Gender = model.Gender,
-                Age = model.Age,
-                UsertypeID = (int)EnumCollection.UserType.RegisteredUser
+                UserTypeID = (int)EnumCollection.UserTypeEnum.RegisteredUser,
+                StatusID = (int)EnumCollection.UserStatusEnum.Active
+
             };
 
             var result = userInfoService.Save(userinfos);
@@ -65,9 +63,9 @@ namespace ATP2.BDAID.Web.Controllers
             if (User.Identity.IsAuthenticated && HttpUtil.UserProfile!=null)
             {
 
-                if (HttpUtil.UserProfile.UserTypeID == (int)EnumCollection.UserType.Admin)
+                if (HttpUtil.UserProfile.UserTypeID == (int)EnumCollection.UserTypeEnum.Admin)
                 {
-                    return RedirectToAction("Index", "Host");
+                    return RedirectToAction("Index", "AdminHost");
                 }
             }
             var model = new LoginModel();
@@ -89,20 +87,25 @@ namespace ATP2.BDAID.Web.Controllers
                 return View(model);
             }
 
+            if (result.Data.StatusID!=(int)EnumCollection.UserStatusEnum.Active)
+            {
+                ViewBag.Error = "Sorry You are not active User.";
+                return View(model);
+            }
+
             var userprofile = new UserProfile()
             {
                 ID = result.Data.ID,
                 Name = result.Data.Name,
-                UserName = result.Data.Username,
                 Email = result.Data.Email,
-                UserTypeID = result.Data.UsertypeID,
+                UserTypeID = result.Data.UserTypeID,
             };
 
             var userprofileJson = JsonConvert.SerializeObject(userprofile);
             FormsAuthentication.SetAuthCookie(userprofileJson,false);
-            if (result.Data.UsertypeID == (int)EnumCollection.UserType.Admin)
+            if (result.Data.UserTypeID == (int)EnumCollection.UserTypeEnum.Admin)
             {
-                return RedirectToAction("Index", "Host");
+                return RedirectToAction("Index", "AdminHost");
             }
             return View(model);
         }

@@ -127,8 +127,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HostController.cs" />
+    <Compile Include="Controllers\AdminHostController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,10 +138,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-slate.css" />
+    <Content Include="Content\bootstrap-superhero.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Controllers\CategoryList.js" />
     <Content Include="Content\CSS\home3.jpg" />
     <Content Include="Content\CSS\HomePage.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\furtherstyles.css" />
+    <Content Include="Content\Images\1.jpg" />
+    <Content Include="Content\Images\2.jpg" />
+    <Content Include="Content\Images\3.jpg" />
+    <Content Include="Content\Images\barchart.jpg" />
+    <Content Include="Content\Images\charity.jpg" />
+    <Content Include="Content\Images\charity2.jpg" />
+    <Content Include="Content\Images\charity3.jpg" />
+    <Content Include="Content\Images\contact.png" />
+    <Content Include="Content\Images\emo.jpg" />
+    <Content Include="Content\Images\gps2.jpg" />
+    <Content Include="Content\Images\graph.jpg" />
+    <Content Include="Content\Images\home3.jpg" />
+    <Content Include="Content\Images\login.jpg" />
+    <Content Include="Content\Images\online-payment.jpg" />
+    <Content Include="Content\Images\phones.jpg" />
+    <Content Include="Content\Images\pie 1.png" />
+    <Content Include="Content\slateTheme.css" />
+    <Content Include="Content\Sql.txt" />
+    <Content Include="Content\WelcomePage.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -151,8 +175,10 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
     <Content Include="Views\Shared\_AuthorizeLayout.cshtml" />
-    <Content Include="Views\Host\Index.cshtml" />
-    <Content Include="Views\Host\DetailView.cshtml" />
+    <Content Include="Views\AdminHost\Index.cshtml" />
+    <Content Include="Views\AdminHost\Profile.cshtml" />
+    <Content Include="Views\Shared\_InnerLayout.cshtml" />
+    <Content Include="Views\AdminService\List.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

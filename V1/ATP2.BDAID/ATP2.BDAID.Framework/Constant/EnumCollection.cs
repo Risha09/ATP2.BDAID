@@ -11,7 +11,7 @@ namespace ATP2.BDAID.Framework.Constant
     public class EnumCollection
     {
         #region UserType
-        public enum UserType
+        public enum UserTypeEnum
         {
             Admin=1,
             Employee=2,
@@ -41,6 +41,29 @@ namespace ATP2.BDAID.Framework.Constant
             {
                 ID = 16,
                 Name = "Non-Registered User"
+            });
+
+            return list;
+        }
+
+        public enum UserStatusEnum
+        {
+            Active = 1,
+            Inactive = 2
+        }
+
+        public static List<EnumDetail> GetUserStatusEnum()
+        {
+            var list = new List<EnumDetail>();
+            list.Add(new EnumDetail()
+            {
+                ID = 1,
+                Name = "Active"
+            });
+            list.Add(new EnumDetail()
+            {
+                ID = 2,
+                Name = "Inactive"
             });
 
             return list;

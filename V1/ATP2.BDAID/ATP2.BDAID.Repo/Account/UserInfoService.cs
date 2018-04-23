@@ -28,12 +28,12 @@ namespace ATP2.BDAID.Services.Account
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     userinfo.ID = GetID();
-                    query = "insert into UserInfo values(" + userinfo.ID + ",'" + userinfo.Username + "','" + userinfo.Name + "','" + userinfo.Email + "','" + userinfo.Contact + "','" + userinfo.Password + "'," + userinfo.Age + ",'" + userinfo.Gender + "'," + userinfo.UsertypeID + ")";
+                    query = "insert into UserInfo values(" + userinfo.ID + ",'" + userinfo.Name + "','" + userinfo.Email + "','" + userinfo.Password + "'," + userinfo.UserTypeID + "," + userinfo.StatusID + ")";
                 }
                 else
                 {
                     query =
-                        "update UserInfo set UserName='" + userinfo.Username + "',Name='" + userinfo.Name + "',Email='" + userinfo.Email + "',Contact='" + userinfo.Contact + "',Password=" + userinfo.Password + ",Age=" + userinfo.Age + ",Gender='" + userinfo.Gender + "',UsertypeID=" + userinfo.UsertypeID + " where ID=" +
+                        "update UserInfo set Name='" + userinfo.Name + "',Email='" + userinfo.Email + "',Password=" + userinfo.Password + ",UsertypeID=" + userinfo.UserTypeID + ",StatusID=" + userinfo.StatusID + " where ID=" +
                         userinfo.ID;
                 }
 
@@ -167,30 +167,29 @@ namespace ATP2.BDAID.Services.Account
                 result.Message = "Invalid Name";
                 return false;
             }
-            if (!ValidationHelper.IsStringValid(obj.Username))
+
+            if (!ValidationHelper.IsStringValid(obj.Email))
             {
                 result.HasError = true;
-                result.Message = "Invalid UserName";
+                result.Message = "Invalid Email";
                 return false;
             }
+
             if (!ValidationHelper.IsStringValid(obj.Password) || obj.Password.Length < 8)
             {
                 result.HasError = true;
                 result.Message = "Invalid Password";
                 return false;
             }
-            //if (DbContext.UserInfos.Any(u => u.Username == obj.Username && u.ID != obj.ID))
-            //{
-            //    result.HasError = true;
-            //    result.Message = "UserName already exists";
-            //    return false;
-            //}
-            //if (DbContext.UserInfos.Any(u => u.Email == obj.Email && u.ID != obj.ID))
-            //{
-            //    result.HasError = true;
-            //    result.Message = "Invalid Email";
-            //    return false;
-            //}
+
+            string query = "select * from UserInfo where Email='" + obj.Email + "' and ID!=" + obj.ID;
+            var dt = DataAccess.GetDataTable(query);
+            if (dt!=null && dt.Rows.Count>0)
+            {
+                result.HasError = true;
+                result.Message = "Email Exists";
+                return false;
+            }
             return true;
         }
 
@@ -200,14 +199,11 @@ namespace ATP2.BDAID.Services.Account
             {
                 UserInfo u = new UserInfo();
                 u.ID = Int32.Parse(row["ID"].ToString());
-                u.Username = row["Username"].ToString();
                 u.Name = row["Name"].ToString();
                 u.Email = row["Email"].ToString();
                 u.Password = row["Password"].ToString();
-                u.Contact = row["Contact"].ToString();
-                u.Gender = row["Gender"].ToString();
-                u.Age = Int32.Parse(row["Age"].ToString());
-                u.UsertypeID = Int32.Parse(row["UsertypeID"].ToString());
+                u.UserTypeID = Int32.Parse(row["UserTypeID"].ToString());
+                u.StatusID = Int32.Parse(row["StatusID"].ToString());
                 return u;
             }
             catch (Exception)
@@ -216,5 +212,6 @@ namespace ATP2.BDAID.Services.Account
             }
 
         }
+
     }
 }

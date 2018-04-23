@@ -14,8 +14,8 @@ namespace ATP2.BDAID.Web.Framework.Attributes
     [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method,AllowMultiple = true,Inherited = true)]
     public class BDAIDAuthorize:FilterAttribute,IAuthorizationFilter
     {
-        public EnumCollection.UserType UserType;
-        public BDAIDAuthorize(EnumCollection.UserType userType)
+        public int[] UserType;
+        public BDAIDAuthorize(int[] userType)
         {
             UserType = userType;
         }
@@ -26,7 +26,8 @@ namespace ATP2.BDAID.Web.Framework.Attributes
                 filterContext.Result=new HttpUnauthorizedResult();
                 return;
             }
-            if (HttpUtil.UserProfile.UserTypeID != (int) UserType)
+
+            if (!UserType.Contains(HttpUtil.UserProfile.UserTypeID))
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
                     new

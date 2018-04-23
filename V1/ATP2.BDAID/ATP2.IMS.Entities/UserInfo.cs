@@ -11,21 +11,22 @@ namespace ATP2.BDAID.Entities
     {
         [Key]
         public int ID { get; set; }
-        [Required]
-        public string Username { get; set; }
+        //[Required]
+        //public string Username { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        public string Contact { get; set; }
+        //[Required]
+        //public string Contact { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public int Age { get; set; }
-        [Required]
-        public string Gender { get; set; }
-        public int UsertypeID { get; set; }
+        //[Required]
+        //public int Age { get; set; }
+        //[Required]
+        //public string Gender { get; set; }
+        public int UserTypeID { get; set; }
+        public int StatusID { get; set; }
     }
 }
