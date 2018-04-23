@@ -1,0 +1,39 @@
+﻿@model ATP2.BDAID.Model.Admin.ServiceModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+<h2>Detail</h2>
+
+@using (Html.BeginForm("Save"))
+{
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oh snap!</strong> @ViewBag.Error
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Service.ID)
+                @Html.TextBoxFor(m => m.Service.ID, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.Service.ID)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Service.Name)
+                @Html.TextBoxFor(m => m.Service.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Service.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Service.ServiceTypeID)
+                @Html.DropDownListFor(m => m.Service.ServiceTypeID, new SelectList(Model.ServiceTypes, "ID", "Name"), "Select Type", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Service.ServiceTypeID)
+            </div>
+            <button type="submit" class="btn btn-default" value="Save">Save</button> <br />
+        </div>
+    </div>
+}

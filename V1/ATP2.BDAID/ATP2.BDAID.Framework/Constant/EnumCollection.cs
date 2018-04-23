@@ -71,5 +71,31 @@ namespace ATP2.BDAID.Framework.Constant
 
         #endregion
 
+        #region ServiceType
+
+        public enum ServiceTypeEnum
+        {
+            Monetary = 1,
+            NonMonetary = 2
+        }
+
+        public static List<EnumDetail> GetServiceTypeEnum()
+        {
+            var list = new List<EnumDetail>();
+            list.Add(new EnumDetail()
+            {
+                ID = 1,
+                Name = "Monetary"
+            });
+            list.Add(new EnumDetail()
+            {
+                ID = 2,
+                Name = "Non Monetary"
+            });
+            return list;
+        }
+
+        #endregion
+
     }
 }

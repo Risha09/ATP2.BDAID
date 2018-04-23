@@ -9,3 +9,16 @@
     constraint  "UserInfo_Uk_Email" unique ("EMAIL")
 
 )
+.....................................................................
+CREATE table SERVICE (
+     ID                 NUMBER(10,0) NOT NULL,
+     NAME               VARCHAR2(300) NOT NULL,
+     SERVICETYPEID      NUMBER(10,0) NOT NULL,
+    constraint  "Service_Pk_ID" primary key ("ID"),
+    constraint  "Service_Uk_Name" unique ("NAME")
+
+)
+
+INSERT INTO SERVICE VALUES(1,'BLOOD',2);
+INSERT INTO SERVICE VALUES(2,'FLOOD',1);
+INSERT INTO SERVICE VALUES(3,'WINTER',1);

@@ -42,7 +42,18 @@
   <ItemGroup>
     <Compile Include="Account\LoginModel.cs" />
     <Compile Include="Account\RegistrationModel.cs" />
+    <Compile Include="Admin\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATP2.BDAID.Framework\ATP2.BDAID.Framework.csproj">
+      <Project>{2897e9eb-63d8-452d-9e6d-870766bc7b2b}</Project>
+      <Name>ATP2.BDAID.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATP2.IMS.Entities\ATP2.BDAID.Entities.csproj">
+      <Project>{647354C3-3FB3-43E8-953B-6CA411B5D663}</Project>
+      <Name>ATP2.BDAID.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

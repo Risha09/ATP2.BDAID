@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ATP2.BDAID.Data;
 using ATP2.BDAID.Services.Account;
+using ATP2.BDAID.Services.Admin;
 
 namespace ATP2.BDAID.Web.Framework.Base
 {
@@ -30,6 +31,17 @@ namespace ATP2.BDAID.Web.Framework.Base
                 if (_userInfoService == null)
                     _userInfoService = new UserInfoService();
                 return _userInfoService;
+            }
+        }
+
+        private static ServiceTypeService _serviceTypeService;
+        public static ServiceTypeService ServiceTypeService
+        {
+            get
+            {
+                if (_serviceTypeService == null)
+                    _serviceTypeService = new ServiceTypeService();
+                return _serviceTypeService;
             }
         }
     }

@@ -1,18 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using ATP2.BDAID.Entities;
+using ATP2.BDAID.Framework.Constant;
+using ATP2.BDAID.Model.Admin;
+using ATP2.BDAID.Services.Admin;
+using ATP2.BDAID.Web.Framework.Base;
 
 namespace ATP2.BDAID.Web.Controllers
 {
-    public class AdminServiceController : Controller
+    public class AdminServiceController : BaseController
     {
         //
         // GET: /AdminService/
         public ActionResult List()
         {
-            return View();
+            var model = ServiceTypeService.GetAll();
+
+            if (TempData["Error"] != null)
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Detail(int id)
+        {
+            var result = ServiceTypeService.GetByID(id);
+            var model = new ServiceModel()
+            {
+                Service = result.Data,
+                ServiceTypes = EnumCollection.GetServiceTypeEnum()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Detail(Service service)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = new ServiceModel()
+                {
+                    Service = service,
+                    ServiceTypes = EnumCollection.GetServiceTypeEnum()
+                };
+
+                return View(model);
+            }
+            var result = ServiceTypeService.Save(service);
+
+            if (result.HasError)
+            {
+                ViewBag.Error = result.Message;
+                var model = new ServiceModel()
+                {
+                    Service = service,
+                    ServiceTypes = EnumCollection.GetServiceTypeEnum()
+                };
+                return View(model);
+            }
+
+            return RedirectToAction("List");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var result = ServiceTypeService.Delete(id);
+
+            if (result)
+            {
+                TempData["Error"] = "Something went wrong";
+            }
+             return RedirectToAction("List");
         }
 	}
 }
