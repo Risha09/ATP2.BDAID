@@ -1,0 +1,137 @@
+﻿#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+ body {
+        background-image: url('Images/login.jpg');
+        /*background: url('C:\Users\qazir\Source\Repos\ATP2B1\bdaidSln\bdaid\Views\Default\login.jpg') fixed;*/
+        background-size: cover;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrap {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+
+    p.form-title {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: black;
+        margin-top: 5%;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+
+    form {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+        form.login input[type="text"], form.login input[type="password"] {
+            width: 100%;
+            margin: 0;
+            padding: 5px 10px;
+            background: 0;
+            border: 0;
+            border-bottom: 1px solid #FFFFFF;
+            outline: 0;
+            font-style: italic;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: black;
+            outline: 0;
+        }
+
+        form.login input[type="submit"] {
+            width: 100%;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-top: 16px;
+            outline: 0;
+            cursor: pointer;
+            letter-spacing: 1px;
+            background-color:gray
+        }
+
+            form.login input[type="submit"]:hover {
+                transition: background-color 0.5s ease;
+            }
+
+        form.login .remember-forgot {
+            float: left;
+            width: 100%;
+            margin: 10px 0 0 0;
+        }
+
+        form.login .forgot-pass-content {
+            min-height: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        form.login label, form.login a {
+            font-size: 12px;
+            font-weight: 700;
+            color: black;
+        }
+
+        form.login a {
+            transition: color 0.5s ease;
+        }
+
+            form.login a:hover {
+                color: gray;
+            }

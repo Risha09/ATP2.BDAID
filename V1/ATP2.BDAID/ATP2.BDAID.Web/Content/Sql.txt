@@ -1,0 +1,11 @@
+﻿CREATE table "USERINFO" (
+    "ID"         NUMBER(10,0) NOT NULL,
+    "Name"       VARCHAR2(300) NOT NULL,
+    "EMAIL"      VARCHAR2(200) NOT NULL,
+    "PASSWORD"   VARCHAR2(100) NOT NULL,
+    "USERTYPEID" NUMBER(10,0) NOT NULL,
+    "STATUSID"   NUMBER(10,0) NOT NULL,
+    constraint  "UserInfo_Pk_ID" primary key ("ID"),
+    constraint  "UserInfo_Uk_Email" unique ("EMAIL")
+
+)
