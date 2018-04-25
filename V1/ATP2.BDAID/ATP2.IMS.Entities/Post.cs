@@ -33,6 +33,7 @@ namespace ATP2.BDAID.Entities
         public string Contact { get; set; }
         public DateTime PostDate { get; set; }
         public int StatusID { get; set; }
+        public int Supported { get; set; }
 
         public string Status
         {

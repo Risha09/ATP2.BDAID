@@ -19,11 +19,13 @@ namespace ATP2.BDAID.Web.Controllers
         // GET: /RegisteredUser/Host/
         public ActionResult Index(int sid)
         {
+            ViewBag.ServiceID = sid;
             return View();
         }
 
         public ActionResult Detail(int id)
         {
+            ViewBag.ID = id;
             return View();
         }
 

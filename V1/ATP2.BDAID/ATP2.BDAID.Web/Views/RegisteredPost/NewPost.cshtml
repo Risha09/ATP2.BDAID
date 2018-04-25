@@ -1,8 +1,78 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "NewPost";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
-
-<h2>NewPost</h2>
+<br/>
+<div ng-controller="RegisteredDetailPostController" ng-init="InitEdit('@Url.Content("~/")',-1)">
+    <input type="button" ng-click="Save()" value="Save" class="btn btn-info"/><br/><br />
+    <table class="table table-bordered">
+        <tr>
+            <td style="width: 15%">Title</td>
+            <td style="width: 35%">
+                <input type="text" ng-model="Post.Title" class="form-control"/>
+            </td>
+            <td style="width: 15%">Type</td>
+            <td style="width: 35%">
+                <select name="deptInput" class="form-control" ng-model="Post.ServiceID" ng-change="ChangeType(b)" ng-options="b.ID as b.Name for b in ServiceList"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td colspan="3">
+                <textarea ng-model="Post.Description" class="form-control"></textarea>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered" ng-show="Post.ServiceID==5">
+        <tr>
+            <td style="width: 15%">Contact</td>
+            <td style="width: 35%">
+                <input type="text" ng-model="Post.Contact" class="form-control"/>
+                {{Post.Contact}}
+            </td>
+            <td style="width: 15%">Address</td>
+            <td style="width: 35%">
+                <textarea ng-model="Post.Address" class="form-control"></textarea>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered" ng-show="Post.ServiceID!=5">
+        <tr>
+            <td style="width: 15%">Area</td>
+            <td style="width: 35%">
+                <input type="text" ng-model="Post.Area" class="form-control"/>
+            </td>
+            <td style="width: 15%">Disease</td>
+            <td style="width: 35%">
+                <input type="text" ng-model="Post.Disease" class="form-control"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Suffered People</td>
+            <td>
+                <input type="text" ng-model="Post.People" class="form-control"/>
+            </td>
+            <td>Funding Needed</td>
+            <td>
+                <input type="number" ng-model="Post.Funding" class="form-control"/>
+            </td>
+        </tr>
+        <tr>
+            <td>In Charge</td>
+            <td>
+                <input type="text" ng-model="Post.InCharge" class="form-control"/>
+            </td>
+            <td>Payment</td>
+            <td>
+                <input type="text" ng-model="Post.Payment" class="form-control"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td colspan="3">
+                <textarea ng-model="Post.Address" class="form-control"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
 

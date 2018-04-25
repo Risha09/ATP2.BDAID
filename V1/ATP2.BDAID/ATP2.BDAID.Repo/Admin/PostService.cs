@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Entities;
+using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
 using Oracle.ManagedDataAccess.Client;
@@ -39,6 +40,40 @@ namespace ATP2.BDAID.Services.Admin
                 {
                     query += " where Title like '%" + key + "%' or DESCRIPTION like '%" + key + "%' or UName like '%" + key + "%' or Email like '%" + key + "%'";
                 }
+
+                query += " order by ID desc";
+
+                var dt = DataAccess.GetDataTable(query);
+
+                if (dt != null && dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Post u = ConvertToEntity(dt.Rows[i]);
+                        result.Add(u);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        public List<Post> GetAll2(int sid)
+        {
+            var result = new List<Post>();
+            try
+            {
+                string query = "select * from PostView where (StatusID=" + (int)EnumCollection.PostStausEnum.Approved + " or StatusID=" + (int)EnumCollection.PostStausEnum.Verified + ")";
+
+                if (sid != -1)
+                {
+                    query += " and ServiceID=" + sid ;
+                }
+
+                query += " order by ID desc";
 
                 var dt = DataAccess.GetDataTable(query);
 
@@ -100,6 +135,51 @@ namespace ATP2.BDAID.Services.Admin
                 }
 
                 result.Data = ConvertToEntity(dt.Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public Result<Post> Insert(Post post)
+        {
+            var result = new Result<Post>();
+            try
+            {
+                post.ID = GetID();
+
+                post.Area = ValidationHelper.IsStringValid(post.Area) ? post.Area : "-";
+                post.Address = ValidationHelper.IsStringValid(post.Address) ? post.Address : "-";
+                post.Payment = ValidationHelper.IsStringValid(post.Payment) ? post.Payment : "-";
+                post.InCharge = ValidationHelper.IsStringValid(post.InCharge) ? post.InCharge : "-";
+                post.Funding = post.Funding;
+                post.People = post.People;
+                post.Disease = ValidationHelper.IsStringValid(post.Disease) ? post.Disease : "-";
+                post.Contact = ValidationHelper.IsStringValid(post.Contact) ? post.Contact : "-";
+                post.ServiceID = post.ServiceID;
+                post.UserID = post.UserID;
+                post.StatusID = (int)EnumCollection.PostStausEnum.Pending;
+                post.Supported = 0;
+
+                string query = "insert into Post Values(" + post.ID + ",'" + post.Title + "','" 
+                               + post.Description + "','" + post.Area + "','" + post.Address + "','" 
+                               + post.Payment + "','" + post.InCharge + "'," + post.Funding + "," + post.People 
+                               + ",'" + post.Disease + "','" + post.Contact + "'," + post.ServiceID + "," 
+                               + post.UserID + ",SYSDATE," + post.StatusID + "," + post.Supported + ")";
+
+                result.HasError = DataAccess.ExecuteQuery(query)<=0;
+
+                if (result.HasError)
+                {
+                    result.Message = "Something Went Wrong";
+                    return result;
+                }
+
+                result.Data = post;
+
             }
             catch (Exception ex)
             {
@@ -193,6 +273,7 @@ namespace ATP2.BDAID.Services.Admin
                 post.ServiceID = Int32.Parse(row["ServiceID"].ToString());
                 post.UserID = Int32.Parse(row["UserID"].ToString());
                 post.StatusID = Int32.Parse(row["StatusID"].ToString());
+                post.Supported = Int32.Parse(row["Supported"].ToString());
                 string dob = row["PostDate"].ToString();
                 post.PostDate = Convert.ToDateTime(dob);
 

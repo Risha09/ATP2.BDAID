@@ -7,6 +7,7 @@ using System.Web.Http;
 using ATP2.BDAID.Entities;
 using ATP2.BDAID.Framework.Object;
 using ATP2.BDAID.Web.Framework.Base;
+using ATP2.BDAID.Web.Framework.Util;
 
 namespace ATP2.BDAID.Web.Controllers.api
 {
@@ -28,6 +29,13 @@ namespace ATP2.BDAID.Web.Controllers.api
         public List<PostComment> GetByUserID(int uid)
         {
             return PostCommentService.GetByUserID(uid);
+        }
+
+        [HttpPost]
+        public Result<PostComment> SaveComment(PostComment com)
+        {
+            com.USERID = HttpUtil.UserProfile.ID;
+            return PostCommentService.Insert(com);
         }
     }
 }

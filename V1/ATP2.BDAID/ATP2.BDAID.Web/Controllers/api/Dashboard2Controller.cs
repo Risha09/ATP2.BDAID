@@ -87,6 +87,9 @@ namespace ATP2.BDAID.Web.Controllers.api
                 Datas = new List<int>()
             };
 
+            if (HttpUtil.UserProfile == null)
+                return model;
+
             var list = PostService.GetAllByUserId(HttpUtil.UserProfile.ID);
             var services = ServiceTypeService.GetAll();
 

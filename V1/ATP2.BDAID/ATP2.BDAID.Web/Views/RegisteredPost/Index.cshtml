@@ -1,8 +1,86 @@
-﻿
+﻿@using ATP2.BDAID.Framework.Constant
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<h2>Index</h2>@Request.Params["sid"]
+<div ng-controller="RegisteredPostController" ng-init="Init('@Url.Content("~/")',@ViewBag.ServiceID)">
+    <div ng-show="ProcessingCount>0">
+        Loading....
+    </div>
+    
+    <br />
+    <div class="row" ng-repeat="post in Posts">
+        <div class="col-md-12">
+            <div class="card" style="padding: 10px">
+                <div class="row">
+                    <a href="#" ng-click="EditPost(post)" style="text-decoration: none">
+                        <div class="col-md-8">
+                            <h5>Post ID: P{{post.ID}} &nbsp;&nbsp;<span ng-show="post.StatusID==@((int)EnumCollection.PostStausEnum.Verified)" class="glyphicon glyphicon-ok" style="color: green"></span></h5>
+                            <h4><b>{{post.Title}}</b></h4>
+                            <p>{{post.UserInfo.Email}}</p>
+                        </div>
+                    </a>
+                    <div class="col-md-4">
+                        <button ng-show="post.Service.ServiceTypeID==@((int)EnumCollection.ServiceTypeEnum.Monetary)" type="button" class="btn btn-success pull-right" ng-click="Donate()">Donate</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="#" ng-click="EditPost(post)" style="text-decoration: none">
+                            <p>
+                                {{post.Description}}
+                            </p>
+                        </a>
+                        <button type="button" ng-click="ChangeSupported(post)" class="btn btn-info">Support <span class="badge">{{post.Supported}}</span></button>
+                        <div style="color: lightskyblue" id="snackbar">Supported &nbsp;<img src="../../Content/Images/emo.jpg" width="20" height="20" /></div>
+                        <button type="button" class="btn btn-primary" ng-click="LoadComments(post)" data-toggle="modal" data-target="#myModal">Comment</button>
+                        @*<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal2">Tag <span class="badge">2</span></button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="commentDiv" ng-repeat="com in Comments">
+                        <small><b>{{com.UserEmail}}</b>-(<b>{{com.COMMENTDATE | date :  "dd/MM/yyyy"}}</b>)</small>&nbsp;:&nbsp;<small>{{com.COMMENTS}}</small>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea ng-model="Message" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary" ng-click="SendComment()">Send</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <script>
+        function myFunction() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
+        }
+    </script>
+}
+
+
 

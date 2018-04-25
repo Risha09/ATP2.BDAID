@@ -19,5 +19,11 @@ namespace ATP2.BDAID.Framework.Helper
             int value;
             return Int32.TryParse(data, out value);
         }
+
+        public static bool IsFloatValid(string data)
+        {
+            float value;
+            return float.TryParse(data, out value);
+        }
     }
 }

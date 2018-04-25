@@ -7,6 +7,7 @@ using System.Web.Http;
 using ATP2.BDAID.Entities;
 using ATP2.BDAID.Framework.Object;
 using ATP2.BDAID.Web.Framework.Base;
+using ATP2.BDAID.Web.Framework.Util;
 
 namespace ATP2.BDAID.Web.Controllers.api
 {
@@ -19,15 +20,34 @@ namespace ATP2.BDAID.Web.Controllers.api
         }
 
         [HttpGet]
+        public List<Post> GetByService(int sid=-1)
+        {
+            return PostService.GetAll2(sid);
+        }
+
+        [HttpGet]
         public Result<Post> GetByID(int id)
         {
             return PostService.GetByID(id);
         }
 
         [HttpGet]
+        public List<Service> GetAllServices()
+        {
+            return ServiceTypeService.GetAll();
+        }
+
+        [HttpGet]
         public Result<Post> UpdateStatus(int id,int statusId)
         {
             return PostService.UpdateStatus(id, statusId);
+        }
+
+        [HttpPost]
+        public Result<Post> Save(Post post)
+        {
+            post.UserID = HttpUtil.UserProfile.ID;
+            return PostService.Insert(post);
         }
     }
 }

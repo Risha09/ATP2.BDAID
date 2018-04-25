@@ -107,6 +107,8 @@ namespace ATP2.BDAID.Services.Admin
                         result.Add(u);
                     }
                 }
+
+                dt = DataAccess.GetDataTable("BEGIN total_donation.find_amt(2); END;");
             }
             catch (Exception ex)
             {

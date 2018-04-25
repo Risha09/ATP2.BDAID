@@ -190,6 +190,7 @@ select	 "POST"."ID" as "ID",
 	 "POST"."USERID" as "USERID",
 	 "POST"."POSTDATE" as "POSTDATE",
 	 "POST"."STATUSID" as "STATUSID",
+	 "POST"."SUPPORTED" as "SUPPORTED",
 	 "USERINFO"."ID" as "UID",
 	 "USERINFO"."EMAIL" as "EMAIL",
 	 "SERVICE"."ID" as "SID",
@@ -404,3 +405,48 @@ BEGIN
 
 END;
 
+
+---------------------------------------------
+
+CREATE OR REPLACE PACKAGE total_donation AS 
+   PROCEDURE find_amt(pid donation.postid%TYPE); 
+END total_donation; 
+.....
+
+CREATE OR REPLACE PACKAGE BODY total_donation AS  
+   
+   PROCEDURE find_amt(pid donation.postid%TYPE) IS 
+   c_amt donation.amount%TYPE; 
+   BEGIN 
+      SELECT sum(amount) INTO c_amt 
+      FROM donation
+      WHERE postid = pid; 
+      dbms_output.put_line('Total Donation: '|| c_amt); 
+   END find_amt; 
+END total_donation; 
+.....
+BEGIN
+ total_donation.find_amt(2);
+END;
+
+------------------------
+
+alter table "POST" modify
+("SUPPORTED" NUMBER(10,0) NOT NULL)
+
+-----------------------------
+
+CREATE OR REPLACE PROCEDURE insertComment(
+	   p_id IN POSTCOMMENT.ID%TYPE,
+	   p_comment IN POSTCOMMENT.COMMENTS%TYPE,
+	   p_pid IN POSTCOMMENT.POSTID%TYPE,
+	   p_uid IN POSTCOMMENT.USERID%TYPE)
+IS
+BEGIN
+
+  INSERT INTO POSTCOMMENT
+  VALUES (p_id,p_comment ,SYSDATE,p_pid ,p_uid);
+
+  COMMIT;
+
+END;

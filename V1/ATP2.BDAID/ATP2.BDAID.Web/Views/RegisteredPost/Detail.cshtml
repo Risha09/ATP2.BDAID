@@ -1,8 +1,136 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
+<br />
+<div ng-controller="RegisteredDetailPostController" ng-init="InitEdit('@Url.Content("~/")',@ViewBag.ID)">
 
-<h2>Detail Post</h2>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div ng-show="ProcessingCount>0">
+            Loading....
+        </div>
 
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Detail
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Title</td>
+                            <td>{{Post.Title}}</td>
+                            <td>Posted By</td>
+                            <td>
+                                {{Post.UserInfo.Email}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td colspan="3">{{Post.Description}}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" ng-show="Post.Service.ServiceTypeID==2">
+                        <tr>
+                            <td>Contact</td>
+                            <td>
+                                {{Post.Contact}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{Post.Address}}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" ng-show="Post.Service.ServiceTypeID==1">
+                        <tr>
+                            <td>Area</td>
+                            <td>
+                                {{Post.Area}}
+                            </td>
+                            <td>Disease</td>
+                            <td>
+                                {{Post.Disease}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Suffered People</td>
+                            <td>
+                                {{Post.People}}
+                            </td>
+                            <td>Funding Needed</td>
+                            <td>
+                                {{Post.Funding}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>In Charge</td>
+                            <td>
+                                {{Post.InCharge}}
+                            </td>
+                            <td>Payment</td>
+                            <td>
+                                {{Post.Payment}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td colspan="3">{{Post.Address}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Comments
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <div class="commentDiv" ng-repeat="com in Comments">
+                        <small><b>{{com.UserEmail}}</b>-(<b>{{com.COMMENTDATE | date :  "dd/MM/yyyy"}}</b>)</small>&nbsp;:&nbsp;<small>{{com.COMMENTS}}</small>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Responses
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <table class="table table-hover" ng-show="Donations.length>0">
+                        <tr>
+                            <td>ID</td>
+                            <td>Type</td>
+                            <td>Amount</td>
+                            <td>Posted By</td>
+                            <td>Post Date</td>
+                        </tr>
+                        <tr ng-repeat="don in Donations">
+                            <td>{{don.ID}}</td>
+                            <td>{{don.Type}}</td>
+                            <td>{{don.AMOUNT}}</td>
+                            <td>{{don.UserEmail}}</td>
+                            <td>{{don.DONATEDATE | date :  "dd/MM/yyyy"}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
