@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 using ServiceAudit = ATP2.BDAID.Entities.ServiceAudit;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class ServiceAuditService
+    public class ServiceAuditService : IServiceAuditService
     {
         public List<ServiceAudit> GetAll()
         {

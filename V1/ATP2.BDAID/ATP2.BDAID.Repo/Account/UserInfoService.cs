@@ -11,11 +11,12 @@ using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
 using ATP2.BDAID.Model.Account;
 using ATP2.BDAID.Entities;
+using ATP2.BDAID.Services2.Interfaces;
 using UserInfo = ATP2.BDAID.Entities.UserInfo;
 
 namespace ATP2.BDAID.Services.Account
 {
-    public class UserInfoService
+    public class UserInfoService : IUserInfoService
     {
         public Result<UserInfo> Save(UserInfo userinfo)
         {

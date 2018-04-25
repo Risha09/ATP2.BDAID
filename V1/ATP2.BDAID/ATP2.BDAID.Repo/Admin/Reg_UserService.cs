@@ -9,12 +9,13 @@ using ATP2.BDAID.Entities;
 using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class Reg_UserService
+    public class Reg_UserService : IReg_UserService
     {
-        public List<Reg_User> GetAll(string key="")
+        public List<Reg_User> GetAll(string key)
         {
             var result = new List<Reg_User>();
             try
@@ -45,6 +46,16 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
+        public Result<Reg_User> Save(Reg_User value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Reg_User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public Result<Reg_User> GetByID(int id)
         {
             var result = new Result<Reg_User>();
@@ -68,6 +79,11 @@ namespace ATP2.BDAID.Services.Admin
                 result.Message = ex.Message;
             }
             return result;
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public Result<Reg_User> GetByName(string name)

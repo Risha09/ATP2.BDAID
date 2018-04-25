@@ -302,6 +302,10 @@
       <Project>{79f22bca-14e8-4a31-ae36-3b391145ef91}</Project>
       <Name>ATP2.BDAID.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATP2.BDAID.Services2.Interfaces\ATP2.BDAID.Services2.Interfaces.csproj">
+      <Project>{2CEF20F9-79A7-43C6-82DE-7C7BD6A99AE4}</Project>
+      <Name>ATP2.BDAID.Services2.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATP2.BDAID.Web.Framework\ATP2.BDAID.Web.Framework.csproj">
       <Project>{e3e0e16e-e4b4-4753-9f94-61e3addfc915}</Project>
       <Name>ATP2.BDAID.Web.Framework</Name>

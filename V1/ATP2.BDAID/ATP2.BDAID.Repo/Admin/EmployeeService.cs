@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using ATP2.BDAID.Entities;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
         public Result<Employee> Save(Employee employee)
         {
@@ -61,6 +62,11 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
+        public List<Employee> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         private int GetID()
         {
             string query = "select * from UserInfo order by ID desc";
@@ -73,7 +79,7 @@ namespace ATP2.BDAID.Services.Admin
             return id;
         }
 
-        public List<Employee> GetAll(string key="")
+        public List<Employee> GetAll(string key)
         {
             var result = new List<Employee>();
             try

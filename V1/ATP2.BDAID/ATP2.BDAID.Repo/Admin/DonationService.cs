@@ -7,12 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 using Donation = ATP2.BDAID.Entities.Donation;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class DonationService
+    public class DonationService:IDonationService
     {
+        public Result<Donation> Save(Donation value)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Donation> GetAll()
         {
             var result = new List<Donation>();
@@ -35,6 +41,16 @@ namespace ATP2.BDAID.Services.Admin
 
             }
             return result;
+        }
+
+        public Result<Donation> GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Donation> GetByPostID(int pid)

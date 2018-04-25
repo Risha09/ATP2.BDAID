@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 using PostComment = ATP2.BDAID.Entities.PostComment;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class PostCommentService
+    public class PostCommentService : IPostCommentService
     {
         public Result<PostComment> Insert(PostComment comment)
         {
@@ -66,6 +67,11 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         private int GetID()
         {
             string query = "select * from PostComment order by ID desc";
@@ -76,6 +82,11 @@ namespace ATP2.BDAID.Services.Admin
                 id = Int32.Parse(dt.Rows[0]["ID"].ToString()) + 1;
 
             return id;
+        }
+
+        public Result<PostComment> Save(PostComment value)
+        {
+            throw new NotImplementedException();
         }
 
         public List<PostComment> GetAll()

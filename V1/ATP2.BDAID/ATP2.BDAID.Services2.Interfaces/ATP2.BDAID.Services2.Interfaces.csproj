@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79F22BCA-14E8-4A31-AE36-3B391145EF91}</ProjectGuid>
+    <ProjectGuid>{2CEF20F9-79A7-43C6-82DE-7C7BD6A99AE4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ATP2.BDAID.Services</RootNamespace>
-    <AssemblyName>ATP2.BDAID.Services</AssemblyName>
+    <RootNamespace>ATP2.BDAID.Services2.Interfaces</RootNamespace>
+    <AssemblyName>ATP2.BDAID.Services2.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,41 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\UserInfoService.cs" />
-    <Compile Include="Admin\PostService.cs" />
-    <Compile Include="Admin\EmployeeService.cs" />
-    <Compile Include="Admin\Reg_UserService.cs" />
-    <Compile Include="Admin\DonationService.cs" />
-    <Compile Include="Admin\PostCommentService.cs" />
-    <Compile Include="Admin\ServiceAuditService.cs" />
-    <Compile Include="Admin\ServiceTypeService.cs" />
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="IDonationService.cs" />
+    <Compile Include="IEmployeeService.cs" />
+    <Compile Include="IPostCommentService.cs" />
+    <Compile Include="IPostService.cs" />
+    <Compile Include="IReg_UserService.cs" />
+    <Compile Include="IServiceAuditService.cs" />
+    <Compile Include="IServiceTypeService.cs" />
+    <Compile Include="IUserInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ATP2.BDAID.Data\ATP2.BDAID.Data.csproj">
-      <Project>{1424a799-05d8-4d8c-bf76-accb458eb154}</Project>
-      <Name>ATP2.BDAID.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ATP2.BDAID.Framework\ATP2.BDAID.Framework.csproj">
-      <Project>{2897e9eb-63d8-452d-9e6d-870766bc7b2b}</Project>
+      <Project>{2897E9EB-63D8-452D-9E6D-870766BC7B2B}</Project>
       <Name>ATP2.BDAID.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ATP2.BDAID.Model\ATP2.BDAID.Model.csproj">
-      <Project>{3addb600-6d54-4993-be52-18626b94a741}</Project>
-      <Name>ATP2.BDAID.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ATP2.BDAID.Services2.Interfaces\ATP2.BDAID.Services2.Interfaces.csproj">
-      <Project>{2CEF20F9-79A7-43C6-82DE-7C7BD6A99AE4}</Project>
-      <Name>ATP2.BDAID.Services2.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ATP2.IMS.Entities\ATP2.BDAID.Entities.csproj">
-      <Project>{647354c3-3fb3-43e8-953b-6ca411b5d663}</Project>
+      <Project>{647354C3-3FB3-43E8-953B-6CA411B5D663}</Project>
       <Name>ATP2.BDAID.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

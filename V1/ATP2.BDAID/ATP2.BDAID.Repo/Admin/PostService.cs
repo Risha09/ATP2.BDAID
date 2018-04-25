@@ -11,11 +11,12 @@ using ATP2.BDAID.Entities;
 using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 using Oracle.ManagedDataAccess.Client;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class PostService
+    public class PostService : IPostService
     {
         private int GetID()
         {
@@ -29,7 +30,7 @@ namespace ATP2.BDAID.Services.Admin
             return id;
         }
 
-        public List<Post> GetAll(string key = "")
+        public List<Post> GetAll(string key)
         {
             var result = new List<Post>();
             try
@@ -61,7 +62,7 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
-        public List<Post> GetAll2(int sid)
+        public List<Post> GetAllByServiceId(int sid)
         {
             var result = new List<Post>();
             try
@@ -117,6 +118,16 @@ namespace ATP2.BDAID.Services.Admin
 
             }
             return result;
+        }
+
+        public Result<Post> Save(Post value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Post> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         public Result<Post> GetByID(int id)

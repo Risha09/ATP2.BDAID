@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
+using ATP2.BDAID.Services2.Interfaces;
 using Service = ATP2.BDAID.Entities.Service;
 
 namespace ATP2.BDAID.Services.Admin
 {
-    public class ServiceTypeService
+    public class ServiceTypeService : IServiceTypeService
     {
         public Result<Service> Save(Service service)
         {

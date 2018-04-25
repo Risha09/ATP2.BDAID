@@ -111,6 +111,10 @@
       <Project>{79f22bca-14e8-4a31-ae36-3b391145ef91}</Project>
       <Name>ATP2.BDAID.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ATP2.BDAID.Services2.Interfaces\ATP2.BDAID.Services2.Interfaces.csproj">
+      <Project>{2CEF20F9-79A7-43C6-82DE-7C7BD6A99AE4}</Project>
+      <Name>ATP2.BDAID.Services2.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ATP2.IMS.Entities\ATP2.BDAID.Entities.csproj">
       <Project>{647354c3-3fb3-43e8-953b-6ca411b5d663}</Project>
       <Name>ATP2.BDAID.Entities</Name>

@@ -22,7 +22,7 @@ namespace ATP2.BDAID.Web.Controllers.api
         [HttpGet]
         public List<Post> GetByService(int sid=-1)
         {
-            return PostService.GetAll2(sid);
+            return PostService.GetAllByServiceId(sid);
         }
 
         [HttpGet]

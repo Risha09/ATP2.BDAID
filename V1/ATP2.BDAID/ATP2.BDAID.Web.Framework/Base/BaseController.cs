@@ -7,35 +7,27 @@ using System.Web.Mvc;
 using ATP2.BDAID.Data;
 using ATP2.BDAID.Services.Account;
 using ATP2.BDAID.Services.Admin;
+using ATP2.BDAID.Services2.Interfaces;
 
 namespace ATP2.BDAID.Web.Framework.Base
 {
     public class BaseController:Controller
     {
-        private static BDAIDDbContext _context;
-        public static  BDAIDDbContext DbContext
-        {
-            get
-            {
-                if(_context==null)
-                    _context=new BDAIDDbContext();
-                return _context;
-            }
-        }
-
-        private static UserInfoService _userInfoService;
-        public static UserInfoService userInfoService
+        private static IUserInfoService _userInfoService;
+        public static IUserInfoService userInfoService
         {
             get
             {
                 if (_userInfoService == null)
                     _userInfoService = new UserInfoService();
                 return _userInfoService;
+
+                //return DependencyResolver.Current.GetService<IUserInfoService>();
             }
         }
 
-        private static ServiceTypeService _serviceTypeService;
-        public static ServiceTypeService ServiceTypeService
+        private static IServiceTypeService _serviceTypeService;
+        public static IServiceTypeService ServiceTypeService
         {
             get
             {
@@ -45,8 +37,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static EmployeeService _EmployeeService;
-        public static EmployeeService EmployeeService
+        private static IEmployeeService _EmployeeService;
+        public static IEmployeeService EmployeeService
         {
             get
             {
@@ -56,8 +48,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static Reg_UserService _Reg_UserService;
-        public static Reg_UserService Reg_UserService
+        private static IReg_UserService _Reg_UserService;
+        public static IReg_UserService Reg_UserService
         {
             get
             {
@@ -67,8 +59,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static PostService _PostService;
-        public static PostService PostService
+        private static IPostService _PostService;
+        public static IPostService PostService
         {
             get
             {
@@ -78,8 +70,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static DonationService _DonationService;
-        public static DonationService DonationService
+        private static IDonationService _DonationService;
+        public static IDonationService DonationService
         {
             get
             {
@@ -89,8 +81,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static PostCommentService _PostCommentService;
-        public static PostCommentService PostCommentService
+        private static IPostCommentService _PostCommentService;
+        public static IPostCommentService PostCommentService
         {
             get
             {
@@ -100,8 +92,8 @@ namespace ATP2.BDAID.Web.Framework.Base
             }
         }
 
-        private static ServiceAuditService _ServiceAuditService;
-        public static ServiceAuditService ServiceAuditService
+        private static IServiceAuditService _ServiceAuditService;
+        public static IServiceAuditService ServiceAuditService
         {
             get
             {
