@@ -56,12 +56,24 @@
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -127,9 +139,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\api\Donation2Controller.cs" />
+    <Compile Include="Controllers\api\PostComment2Controller.cs" />
+    <Compile Include="Controllers\RegisteredPostController.cs" />
+    <Compile Include="Controllers\RegisteredHostController.cs" />
     <Compile Include="Controllers\AdminHostController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminEmployeeController.cs" />
     <Compile Include="Controllers\AdminServiceController.cs" />
+    <Compile Include="Controllers\AdminPostController.cs" />
+    <Compile Include="Controllers\AdminUserController.cs" />
+    <Compile Include="Controllers\api\Dashboard2Controller.cs" />
+    <Compile Include="Controllers\api\Post2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,6 +159,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HTML\About.html" />
+    <Content Include="HTML\ang.html" />
+    <Content Include="HTML\Contact.html" />
+    <Content Include="HTML\Login.html" />
+    <Content Include="HTML\new 1.txt" />
+    <Content Include="HTML\NonRegistered\home.html" />
+    <Content Include="HTML\NonRegistered\Index.html" />
+    <Content Include="HTML\Registered\home.html" />
+    <Content Include="HTML\Registered\Index.html" />
+    <Content Include="HTML\Registered\Profile.html" />
+    <Content Include="HTML\Registration.html" />
+    <Content Include="HTML\Users\Calculate.html" />
+    <Content Include="HTML\Users\donate.html" />
+    <Content Include="HTML\Users\email.html" />
+    <Content Include="HTML\Users\NewPost.html" />
+    <Content Include="HTML\Users\NewPost2.html" />
+    <Content Include="HTML\Users\posts.html" />
+    <Content Include="HTML\Users\response2.html" />
+    <Content Include="HTML\Users\viewDetail.html" />
+    <Content Include="HTML\WelcomePage.html" />
+    <Content Include="Scripts\angular-chart.js" />
+    <Content Include="Scripts\angular.js" />
     <Content Include="Content\bootstrap-slate.css" />
     <Content Include="Content\bootstrap-superhero.css" />
     <Content Include="Content\bootstrap.css" />
@@ -171,6 +215,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\controller\AllController.js" />
+    <Content Include="Scripts\controller\app.js" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
@@ -180,6 +227,23 @@
     <Content Include="Views\Shared\_InnerLayout.cshtml" />
     <Content Include="Views\AdminService\List.cshtml" />
     <Content Include="Views\AdminService\Detail.cshtml" />
+    <Content Include="Views\AdminEmployee\Detail.cshtml" />
+    <Content Include="Views\AdminEmployee\List.cshtml" />
+    <Content Include="Views\AdminUser\Detail.cshtml" />
+    <Content Include="Views\AdminUser\List.cshtml" />
+    <Content Include="Views\AdminPost\List.cshtml" />
+    <Content Include="Views\AdminPost\Detail.cshtml" />
+    <Content Include="Views\AdminHost\DashBoard.cshtml" />
+    <Content Include="Views\Shared\_RUAuthorizeLayout.cshtml" />
+    <Content Include="Views\RegisteredHost\DashBoard.cshtml" />
+    <Content Include="Views\RegisteredHost\Index.cshtml" />
+    <Content Include="Views\RegisteredHost\Profile.cshtml" />
+    <Content Include="Views\RegisteredPost\Index.cshtml" />
+    <Content Include="Views\RegisteredPost\Detail.cshtml" />
+    <Content Include="Views\RegisteredPost\Donations.cshtml" />
+    <Content Include="Views\RegisteredPost\NewPost.cshtml" />
+    <Content Include="Views\RegisteredPost\Response.cshtml" />
+    <Content Include="Views\AdminService\Reports.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

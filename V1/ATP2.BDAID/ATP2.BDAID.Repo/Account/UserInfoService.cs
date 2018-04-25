@@ -33,7 +33,7 @@ namespace ATP2.BDAID.Services.Account
                 else
                 {
                     query =
-                        "update UserInfo set Name='" + userinfo.Name + "',Email='" + userinfo.Email + "',Password=" + userinfo.Password + ",UsertypeID=" + userinfo.UserTypeID + ",StatusID=" + userinfo.StatusID + " where ID=" +
+                        "update UserInfo set UName='" + userinfo.Name + "',Email='" + userinfo.Email + "',Password=" + userinfo.Password + ",UsertypeID=" + userinfo.UserTypeID + ",StatusID=" + userinfo.StatusID + " where ID=" +
                         userinfo.ID;
                 }
 
@@ -106,7 +106,7 @@ namespace ATP2.BDAID.Services.Account
 
                 if (dt != null && dt.Rows.Count != 0)
                 {
-                    for (int i = 0; i <= dt.Rows.Count; i++)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         UserInfo u = ConvertToEntity(dt.Rows[i]);
                         result.Add(u);
@@ -199,7 +199,7 @@ namespace ATP2.BDAID.Services.Account
             {
                 UserInfo u = new UserInfo();
                 u.ID = Int32.Parse(row["ID"].ToString());
-                u.Name = row["Name"].ToString();
+                u.Name = row["UName"].ToString();
                 u.Email = row["Email"].ToString();
                 u.Password = row["Password"].ToString();
                 u.UserTypeID = Int32.Parse(row["UserTypeID"].ToString());

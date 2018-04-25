@@ -1,8 +1,30 @@
-﻿
+﻿@using ATP2.BDAID.Framework.Constant
+@model ATP2.BDAID.Framework.Object.UserProfile
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
 <h2>Profile</h2>
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>@Model.ID</td>
+        <td>Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>@Model.Email</td>
+        <td>User Type</td>
+        <td>@((EnumCollection.UserTypeEnum)Model.UserTypeID)</td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td>Active</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+
+</table>
 

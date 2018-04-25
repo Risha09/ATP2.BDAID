@@ -1,0 +1,101 @@
+﻿@using ATP2.BDAID.Entities
+@using ATP2.BDAID.Framework.Constant
+@using ATP2.BDAID.Web.Framework.Util
+@model List<ATP2.BDAID.Entities.UserInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_RUAuthorizeLayout.cshtml";
+    var services = (List<Service>) ViewBag.Services;
+}
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index","RegisteredHost")">BDAid</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" onclick="ChangeIframe('@Url.Action("Index","RegisteredPost",new{sid=-1})','Home')">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach (var service in services)
+                        {
+                            <li>
+                                <a href="#" onclick="ChangeIframe('@Url.Action("Index","RegisteredPost",new{sid=service.ID})','@service.Name')">@service.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li> @Html.ActionLink("Welcome, " + HttpUtil.UserProfile.Name, "Index", "RegisteredHost")</li>
+                <li> @Html.ActionLink("Log Out", "Logout", "Account")</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid body-content">
+    <div class="row" style="margin-top: 10px">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","RegisteredHost")','Profile')">Profile</a>
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Donations","RegisteredPost")', 'Donations')">Donations</a>
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("NewPost", "RegisteredPost")','Post')">Post</a>
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Response", "RegisteredPost")','Posts')">Response</a>
+                @*<a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Message')">Message Box</a>*@
+            </div>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs" role="tablist" id="tabBar">
+                <li role="presentation" id="liDash" class="active"><a href="#dashboard" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
+                <li role="presentation" id="liContainer"><a href="#postContainer" id="hContainer" aria-controls="home" role="tab" data-toggle="tab">Profile</a></li>
+            </ul>
+            <div class="tab-content" id="tabContainer">
+                <div role="tabpanel" class="tab-pane active" id="dashboard">
+                    <iframe id="iDashBoard" src="@Url.Action("DashBoard","RegisteredHost")" width="100%" frameborder="0"></iframe>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="postContainer">
+                    <iframe id="iFrameContainer" src="@Url.Action("Profile", "RegisteredHost")" width="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            var height = $(document).height() - 135;
+            $("#iFrameContainer").height(height);
+            $("#iDashBoard").height(height);
+        });
+
+        function ChangeIframe(url, tablName) {
+            $('#hContainer').text(tablName);
+
+            $("#iFrameContainer").attr('src', url);
+
+            $('#liDash').removeClass('active');
+            $('#dashboard').removeClass('active');
+            $('#liContainer').addClass('active');
+            $('#postContainer').addClass('active');
+
+        }
+
+    </script>
+}
+

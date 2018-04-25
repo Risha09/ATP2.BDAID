@@ -36,9 +36,14 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\UserInfoService.cs" />
+    <Compile Include="Admin\PostService.cs" />
+    <Compile Include="Admin\EmployeeService.cs" />
+    <Compile Include="Admin\Reg_UserService.cs" />
+    <Compile Include="Admin\DonationService.cs" />
+    <Compile Include="Admin\PostCommentService.cs" />
+    <Compile Include="Admin\ServiceAuditService.cs" />
     <Compile Include="Admin\ServiceTypeService.cs" />
     <Compile Include="Base\BaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -23,8 +23,7 @@ namespace ATP2.BDAID.Services.Admin
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
-                    service.ID = GetID();
-                    query = "insert into Service values(" + service.ID + ",'" + service.Name + "'," + service.ServiceTypeID + ")";
+                    query = "BEGIN insertService('" + service.Name + "'," + service.ServiceTypeID+ "); END;";
                 }
                 else
                 {
@@ -37,14 +36,16 @@ namespace ATP2.BDAID.Services.Admin
                     return result;
                 }
 
-                result.HasError = DataAccess.ExecuteQuery(query) <= 0;
+                DataAccess.ExecuteQuery(query);
+                result.Data = service;
+                //result.HasError = DataAccess.ExecuteQuery(query) <= 0;
 
-                if (result.HasError)
-                    result.Message = "Something Went Wrong";
-                else
-                {
-                    result.Data = service;
-                }
+                //if (result.HasError)
+                //    result.Message = "Something Went Wrong";
+                //else
+                //{
+                //    result.Data = service;
+                //}
             }
             catch (Exception ex)
             {
@@ -76,7 +77,7 @@ namespace ATP2.BDAID.Services.Admin
 
                 if (dt != null && dt.Rows.Count != 0)
                 {
-                    for (int i = 0; i <= dt.Rows.Count; i++)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Service u = ConvertToEntity(dt.Rows[i]);
                         result.Add(u);

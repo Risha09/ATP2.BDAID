@@ -8,6 +8,7 @@ using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Web.Framework.Attributes;
 using ATP2.BDAID.Web.Framework.Base;
+using ATP2.BDAID.Web.Framework.Util;
 
 namespace ATP2.BDAID.Web.Controllers
 {
@@ -23,6 +24,12 @@ namespace ATP2.BDAID.Web.Controllers
 
         public ActionResult Profile()
         {
+            return View(HttpUtil.UserProfile);
+        }
+
+        public ActionResult DashBoard()
+        {
+
             return View();
         }
 	}

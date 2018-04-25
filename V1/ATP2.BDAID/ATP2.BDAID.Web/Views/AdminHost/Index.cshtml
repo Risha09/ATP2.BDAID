@@ -1,4 +1,5 @@
-﻿          
+﻿@using ATP2.BDAID.Framework.Constant
+@using ATP2.BDAID.Web.Framework.Util
 @model List<ATP2.BDAID.Entities.UserInfo>
 
 @{
@@ -11,10 +12,13 @@
         <div class="list-group">
             <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","AdminHost")','Profile')">Profile</a>
             <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("List","AdminService")', 'Services')">Services</a>
-            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","AdminHost")','Employee')">Employees</a>
-            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Users')">Users</a>
-            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Posts')">Posts</a>
-            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Message')">Message Box</a>
+            @if (HttpUtil.UserProfile.UserTypeID == (int)EnumCollection.UserTypeEnum.Admin)
+            {
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("List","AdminEmployee")','Employees')">Employees</a>
+            }
+            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("List", "AdminUser")','Users')">Users</a>
+            <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("List","AdminPost")','Posts')">Posts</a>
+            @*<a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Message')">Message Box</a>*@
         </div>
     </div>
     <div class="col-md-9">
@@ -24,7 +28,7 @@
         </ul>
         <div class="tab-content" id="tabContainer">
             <div role="tabpanel" class="tab-pane active" id="dashboard">
-                Dashboard
+                <iframe id="iDashBoard" src="@Url.Action("DashBoard","AdminHost")" width="100%" frameborder="0"></iframe>
             </div>
             <div role="tabpanel" class="tab-pane" id="postContainer">
                 <iframe id="iFrameContainer" src="@Url.Action("Profile","AdminHost")" width="100%" frameborder="0"></iframe>
@@ -37,14 +41,14 @@
 {
     <script>
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var height = $(document).height() - 135;
             $("#iFrameContainer").height(height);
-
+            $("#iDashBoard").height(height);
         });
 
-        function ChangeIframe(url,tablName) {
+        function ChangeIframe(url, tablName) {
             $('#hContainer').text(tablName);
 
             $("#iFrameContainer").attr('src', url);

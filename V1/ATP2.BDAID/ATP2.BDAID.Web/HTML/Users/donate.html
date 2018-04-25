@@ -1,0 +1,75 @@
+﻿<div class="panel panel-default">
+	<div class="panel-heading">Donate</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-dismissible alert-info">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Look up!</strong> You are one step away from donating.<br />Please select you paytype.
+				</div>
+				<form style="margin-left: 20px;margin-right: 20px" action="#" method="POST" class="form-horizontal">
+					<div class="form-group">
+						<label>Pay With:</label>
+						<div>
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" onclick="Bkash()" value="option1">
+									Bkash
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" onclick="Bank()" value="option2">
+									Bank account
+								</label>
+							</div>
+						</div>
+					</div>
+					<div id="bkashContent" style="display: none">
+						<div class="form-group">
+							<label for="mobile">Mobile Number</label>
+							<input type="text" class="form-control" id="mobile" placeholder="Mobile">
+						</div>
+						<div class="form-group">
+							<label for="Amount">Amount</label>
+							<input type="text" class="form-control" id="Amount" placeholder="Amount">
+						</div>
+						<div class="form-group">
+							<label for="Transaction">Transaction Number</label>
+							<input type="text" class="form-control" id="Transaction" placeholder="Transaction">
+						</div>
+						<button type="button" class="btn btn-success" onclick="loadContent('../Users/posts.html')" value="Send">Send</button>
+						<button type="button" class="btn btn-danger" value="Cancel" onclick="loadContent('../Users/posts.html')">Cancel</button>
+					</div>
+					<div id="bankContent" style="display: none">
+						<div>
+							<img src="../../Content/Images/online-payment.jpg" class="img-rounded" style="width: 100%;height: 150px" />
+						</div><br/>
+						<button type="button" class="btn btn-danger" value="Cancel" onclick="loadContent('../Users/posts.html')">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function Bkash() {
+
+		$("#bankContent").hide("slow", function () {
+		});
+		$("#bkashContent").show("slow", function () {
+		});
+
+	}
+
+	function Bank() {
+
+		$("#bkashContent").hide("slow", function () {
+		});
+		$("#bankContent").show("slow", function () {
+		});
+	}
+
+</script>

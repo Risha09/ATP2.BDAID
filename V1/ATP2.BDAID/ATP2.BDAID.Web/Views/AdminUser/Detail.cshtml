@@ -1,0 +1,121 @@
+﻿@using ATP2.BDAID.Framework.Constant
+@model ATP2.BDAID.Model.Admin.UserModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+
+
+<br />
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a style="text-decoration: none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Detail
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>ID</td>
+                        <td>@Model.User.UserInfo.ID</td>
+                        <td>Name</td>
+                        <td>@Model.User.UserInfo.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.User.UserInfo.Email</td>
+                        <td>User Type</td>
+                        <td>@((EnumCollection.UserTypeEnum)Model.User.UserInfo.UserTypeID)</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>@((EnumCollection.UserStatusEnum)Model.User.UserInfo.StatusID)</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                </table>
+                @if (Model.User.UserInfo.UserTypeID == 4)
+                {
+                    <table class="table table-bordered">
+                        <tr>
+                            
+                            <td>Gender</td>
+                            <td>@Model.User.Gender</td>
+                            <td>Date of Birth</td>
+                            <td>@Model.User.DOB.ToString("dd-MM-yyyy")</td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td>@Model.User.Contact</td>
+                            <td>Profession</td>
+                            <td>@Model.User.Profession</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td colspan="3">@Model.User.Address</td>
+                        </tr>
+
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a style="text-decoration: none" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Posts
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                @foreach (var p in Model.Posts)
+                {
+                    <a href="@Url.Action("Detail","AdminPost",new{id=p.ID})" style="text-decoration: none">
+                        <div class="cardR">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>
+                                        Post ID: @p.ID &nbsp;&nbsp;
+                                        @if (p.StatusID == (int)EnumCollection.PostStausEnum.Verified)
+                                        {
+                                            <span class="glyphicon glyphicon-ok" style="color: green"></span>
+                                        }
+                                    </h5>
+                                    <h4><b>@p.Title</b></h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                    <p>
+                                        @p.Description
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    div.cardR {
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+        padding: 5px;
+    }
+</style>

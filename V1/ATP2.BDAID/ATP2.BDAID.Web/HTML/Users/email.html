@@ -1,0 +1,33 @@
+﻿<div class="panel panel-default">
+	<div class="panel-heading">Email</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12" style="margin-left: 10px; margin-right: 10px">
+				<form name='f1' action="#">
+					<div class="form-group">
+						<label class="control-label" for="focusedInput">Enter Detail to Send Email </label>
+						<input class="form-control" type="email" name="Email" placeholder=" Email Recipients Id" required pattern="[a-zA-Z]{3,}@[a-zA-Z]{3,}[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,}">
+					</div>
+
+
+					<div class="form-group">
+						<input class="form-control" id="focusedInput" placeholder="Subject" type="text">
+					</div>
+
+					<div class="form-group">
+						<label for="textArea" class="col-lg-2 control-label"></label>
+
+						<textarea class="form-control" rows="3" id="textArea" placeholder="Enter Text"></textarea>
+						<span class="help-block">Press Send Email to send the mail.</span>
+
+					</div>
+
+					<button type="button" class="btn btn-success" onclick="loadContent('../Users/posts.html')" value="Send">Send</button>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+

@@ -28,11 +28,18 @@ namespace ATP2.BDAID.Web.Controllers
             var result = ServiceTypeService.GetByID(id);
             var model = new ServiceModel()
             {
-                Service = result.Data,
+                Service = result.Data??new Service(),
                 ServiceTypes = EnumCollection.GetServiceTypeEnum()
             };
 
             return View(model);
+        }
+
+        public ActionResult Reports()
+        {
+            var result = ServiceAuditService.GetAll();
+
+            return View(result);
         }
 
         [HttpPost]
@@ -68,7 +75,7 @@ namespace ATP2.BDAID.Web.Controllers
         {
             var result = ServiceTypeService.Delete(id);
 
-            if (result)
+            if (!result)
             {
                 TempData["Error"] = "Something went wrong";
             }

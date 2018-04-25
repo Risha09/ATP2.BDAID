@@ -22,3 +22,385 @@ CREATE table SERVICE (
 INSERT INTO SERVICE VALUES(1,'BLOOD',2);
 INSERT INTO SERVICE VALUES(2,'FLOOD',1);
 INSERT INTO SERVICE VALUES(3,'WINTER',1);
+
+CREATE SEQUENCE Service_seq_ID
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 6
+  INCREMENT BY 1
+  CACHE 20;
+
+----------------------------------------------------------
+
+CREATE table "EMPLOYEE" (
+    "ID"         NUMBER(10,0),
+    "DOB"        DATE,
+    "SALARY"     NUMBER(18,2),
+    "CONTACT"    VARCHAR2(50),
+    "GENDER"     VARCHAR2(10),
+    constraint  "Employee_Pk_ID" primary key ("ID")
+)
+/
+
+ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "EMPLOYEE_FK_ID" 
+FOREIGN KEY ("ID")
+REFERENCES "USERINFO" ("ID")
+
+/
+
+insert into employee values(2,TO_DATE('1997/02/03', 'yyyy/mm/dd'),10000,'01616117799','Female')
+
+-------------------------------------------
+
+create or replace view "EMPLOYEEVIEW" as
+select	 "EMPLOYEE"."ID" as "ID",
+	 "EMPLOYEE"."DOB" as "DOB",
+	 "EMPLOYEE"."SALARY" as "SALARY",
+	 "EMPLOYEE"."CONTACT" as "CONTACT",
+	 "EMPLOYEE"."GENDER" as "GENDER",
+	 "USERINFO"."ID" as "UserID",
+	 "USERINFO"."UNAME" as "UNAME",
+	 "USERINFO"."EMAIL" as "EMAIL",
+	 "USERINFO"."PASSWORD" as "PASSWORD",
+	 "USERINFO"."USERTYPEID" as "USERTYPEID",
+	 "USERINFO"."STATUSID" as "STATUSID" 
+ from	 "USERINFO" "USERINFO",
+	 "EMPLOYEE" "EMPLOYEE"
+Where EMPLOYEE.ID=USERINFO.ID and "USERINFO"."USERTYPEID"=2
+ 
+
+
+-----------------------------------
+
+alter table "USERINFO" rename column
+"Name" to "UNAME"
+.....................................................................
+
+CREATE table "REG_USER" (
+    "ID"         NUMBER(10,0),
+    "NAME"       VARCHAR2(150),
+    "ADDRESS"    VARCHAR2(250),
+    "CONTACT"    VARCHAR2(50),
+    "PROFESSION" VARCHAR2(50),
+     "DOB"        DATE,
+    "GENDER"     VARCHAR2(10),
+    "REF_ID"     NUMBER(10,0),
+    constraint  "Reg_User_Pk_ID" primary key ("ID"),
+    constraint  "Reg_User_Uk_Refid" unique ("REF_ID")
+	)
+
+	ALTER TABLE "REG_USER" ADD CONSTRAINT "Reg_User_FK_ID" 
+FOREIGN KEY ("ID")
+REFERENCES "USERINFO" ("ID")
+
+ALTER TABLE REG_USER DROP COLUMN NAME
+
+INSERT INTO USERINFO VALUES(4,'Bony Tasnim','bony@aiub.edu','12345',4,1)
+INSERT INTO reg_user VALUES(4,'Dhamnondi 8/a','01987654542','Teacher',TO_DATE('1997/12/03', 'yyyy/mm/dd'),'Female',44415)
+INSERT INTO reg_user VALUES(5,'Bashundhara 234/b','01556434542','Doctor',TO_DATE('1996/12/23', 'yyyy/mm/dd'),'Female',55515)
+INSERT INTO USERINFO VALUES(5,'Shejuti Tasnim','sa@aiub.edu','12345',4,1)
+INSERT INTO USERINFO VALUES(6,'Rafsan','jany@aiub.edu','11111',16,0)
+INSERT INTO USERINFO VALUES(7,'Akif','akif@aiub.edu','11111',16,0)
+
+..................................................................................
+
+select * from userinfo left outer join reg_user using (ID) WHERE ID NOT IN(1,2)
+
+DECLARE 
+   CURSOR USERS_cur is 
+      select * from userinfo left outer join reg_user using (ID) WHERE ID NOT IN(1,2);
+      USERS_rec USERS_cur%rowtype; 
+BEGIN 
+   OPEN USERS_cur; 
+   LOOP 
+      FETCH USERS_cur into USERS_rec; 
+      EXIT WHEN USERS_cur%notfound; 
+      DBMS_OUTPUT.put_line(USERS_rec.id || ' ' || USERS_rec.Uname); 
+   END LOOP; 
+END; 
+
+create or replace view "USERVIEW" as
+select	 U.ID,RG.DOB,RG.PROFESSION,RG.CONTACT,RG.ADDRESS,RG.REF_ID,RG.GENDER,U.UNAME,U.EMAIL,u.Password,U.USERTYPEID,U.STATUSID FROM UserInfo u left outer join reg_user rg on rg.ID=u.ID
+where U.UserTypeID NOT IN (1,2)
+
+----------------------------------------------------------------------------------
+
+CREATE table "POST" (
+    "ID"         NUMBER(10,0),
+    "TYPE"       VARCHAR2(150),
+    "BODY"       VARCHAR2(1000),
+    "ISDELETE"   VARCHAR2(50),
+    constraint  "Post_Pk_ID" primary key ("ID")
+)
+
+ALTER TABLE "POST" ADD CONSTRAINT "Post_FK1_ID" 
+FOREIGN KEY ("ID")
+REFERENCES "USERINFO" ("ID")
+
+ALTER TABLE "POST" ADD CONSTRAINT "Post_FK2_ID" 
+FOREIGN KEY ("ID")
+REFERENCES "SERVICE" ("ID")
+
+------------------------------------------------------------
+
+CREATE table "POST" (
+    "ID"          NUMBER(10,0) NOT NULL,
+    "TITLE"       VARCHAR2(300) NOT NULL,
+    "DESCRIPTION" VARCHAR2(4000) NOT NULL,
+    "AREA"        VARCHAR2(1000) NOT NULL,
+    "ADDRESS"     VARCHAR2(4000) NOT NULL,
+    "PAYMENT"     VARCHAR2(4000) NOT NULL,
+    "INCHARGE"    VARCHAR2(1000) NOT NULL,
+    "FUNDING"     NUMBER(18,2) NOT NULL,
+    "PEOPLE"      NUMBER(10, 0) NOT NULL,
+    "DISEASE"     VARCHAR2(1000) NOT NULL,
+    "CONTACT"     VARCHAR2(200) NOT NULL,
+    "SERVICEID"   NUMBER(10,0) NOT NULL,
+    "USERID"      NUMBER(10,0) NOT NULL,
+    constraint  "POST_PK_ID" primary key ("ID")
+)
+/
+
+ALTER TABLE "POST" ADD CONSTRAINT "POST_FK_SERVICE" 
+FOREIGN KEY ("SERVICEID")
+REFERENCES "SERVICE" ("ID")
+
+/
+ALTER TABLE "POST" ADD CONSTRAINT "POST_FK_USER" 
+FOREIGN KEY ("USERID")
+REFERENCES "USERINFO" ("ID")
+
+/
+alter table "POST" add
+("POSTDATE" DATE NOT NULL)
+
+create or replace view "POSTVIEW" as
+select	 "POST"."ID" as "ID",
+	 "POST"."TITLE" as "TITLE",
+	 "POST"."DESCRIPTION" as "DESCRIPTION",
+	 "POST"."AREA" as "AREA",
+	 "POST"."ADDRESS" as "ADDRESS",
+	 "POST"."PAYMENT" as "PAYMENT",
+	 "POST"."INCHARGE" as "INCHARGE",
+	 "POST"."FUNDING" as "FUNDING",
+	 "POST"."PEOPLE" as "PEOPLE",
+	 "POST"."DISEASE" as "DISEASE",
+	 "POST"."CONTACT" as "CONTACT",
+	 "POST"."SERVICEID" as "SERVICEID",
+	 "POST"."USERID" as "USERID",
+	 "POST"."POSTDATE" as "POSTDATE",
+	 "POST"."STATUSID" as "STATUSID",
+	 "USERINFO"."ID" as "UID",
+	 "USERINFO"."EMAIL" as "EMAIL",
+	 "SERVICE"."ID" as "SID",
+	 "SERVICE"."NAME" as "NAME",
+	 "SERVICE"."SERVICETYPEID" as "SERVICETYPEID" 
+ from	 "SERVICE" "SERVICE",
+	 "USERINFO" "USERINFO",
+	 "POST" "POST"
+where "POST"."SERVICEID"="SERVICE"."ID" and 
+"POST"."USERID" = "USERINFO"."ID"
+/   
+
+/   
+
+alter table "POST" add
+("STATUSID" NUMBER(10,0) NOT NULL)
+
+-----------------------------------------------
+
+CREATE OR REPLACE FUNCTION TotalPostsByService(sid IN number)
+RETURN number IS 
+   total number(5) := 0; 
+BEGIN 
+   SELECT count(*) into total 
+   FROM post where ServiceID=sid; 
+    
+   RETURN total; 
+END; 
+
+---------------------------------
+
+CREATE OR REPLACE PROCEDURE insertService(
+	   p_name IN SERVICE.Name%TYPE,
+	   p_typeId IN SERVICE.SERVICETYPEID%TYPE)
+IS
+BEGIN
+
+  INSERT INTO Service
+  VALUES (Service_seq_ID.NEXTVAL,p_name,p_typeId);
+
+  COMMIT;
+
+END;
+------------------------------------------------------------------
+CREATE table "SERVICEAUDIT" (
+    "ACTION"     VARCHAR2(4000),
+    "ACTIONDATE" DATE
+)
+
+CREATE OR REPLACE TRIGGER service_changes 
+AFTER DELETE OR INSERT OR UPDATE ON service
+
+BEGIN 
+   IF INSERTING THEN
+   INSERT INTO SERVICEAUDIT('INSERT',SYSDATE);
+   ELSIF UPDATING THEN
+   INSERT INTO SERVICEAUDIT('UPDATE',SYSDATE);
+   ELSIF DELETING THEN
+   INSERT INTO SERVICEAUDIT('DELETE',SYSDATE);
+   ENDIF;
+END; 
+/ 
+--------------------------------------------------------
+CREATE table "POSTCOMMENT" (
+    "ID"          NUMBER(10,0),
+    "COMMENTS"    VARCHAR2(4000),
+    "COMMENTDATE" DATE,
+    "POSTID"      NUMBER(10,0),
+    "USERID"      NUMBER(10,0),
+    constraint  "PostComment_Pk" primary key ("ID")
+)
+---------------------------------------------------------
+CREATE table "TAG" (
+    "ID"         NUMBER(10,0),
+    "TAGGED"     VARCHAR2(4000),
+    "TAGDATE"    DATE,
+    "POSTID"     NUMBER(10,0),
+    "USERID"     NUMBER(10,0),
+    constraint  "Tag_Pk" primary key ("ID")
+)
+--------------------------------------------------
+CREATE table "DONATION" (
+    "ID"         NUMBER(10,0),
+    "DONATEDATE" DATE,
+    "TYPE"       VARCHAR2(100),
+    "AMOUNT"     NUMBER(10,0),
+    "POSTID"     NUMBER(10,0),
+    "USERID"     NUMBER(10,0),
+    constraint  "Donation_Pk" primary key ("ID")
+)
+
+alter table "DONATION" modify
+("AMOUNT" NUMBER(18,2) NOT NULL)
+
+-------------------------------
+CREATE table "PENDINGPOSTS" (
+    "POSTID"     NUMBER(10,0),
+    "ID"         NUMBER(10,0),
+    constraint  "PENDINGPOSTS_PK" primary key ("ID")
+)
+/
+
+ALTER TABLE "PENDINGPOSTS" ADD CONSTRAINT "PENDINGPOSTS_FK" 
+FOREIGN KEY ("POSTID")
+REFERENCES "POST" ("ID")
+------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER NOTIFY 
+AFTER INSERT ON USERINFO
+ 
+DECLARE 
+   NUM number; 
+BEGIN 
+   SELECT COUNT(*) INTO NUM FROM USERINFO;
+   IF NUM>1000 THEN
+   dbms_output.put_line('Time to notify'); 
+   end if;
+END; 
+/ 
+
+---------------------------------------------------------------------
+
+CREATE table SERVICEAudit (
+     ID                 NUMBER(10,0) NOT NULL,
+     SID                NUMBER(10,0) NOT NULL,
+     NAME               VARCHAR2(300) NOT NULL,
+     SERVICETYPEID      NUMBER(10,0) NOT NULL,
+     UserNAME           VARCHAR2(300) NOT NULL,
+     ChangeDate         Date,
+     constraint  "ServiceAudit_Pk_ID" primary key ("ID")
+)
+
+alter table "SERVICEAUDIT" add
+("ACTIONNAME" VARCHAR2(300) NOT NULL)
+
+CREATE SEQUENCE ServiceAudit_seq_ID
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+
+  CREATE OR REPLACE TRIGGER Service_after_insert
+AFTER INSERT
+   ON Service
+   FOR EACH ROW
+
+DECLARE
+   v_username varchar2(10);
+
+BEGIN
+
+   SELECT user INTO v_username
+   FROM dual;
+
+   INSERT INTO SERVICEAudit
+   VALUES
+   ( ServiceAudit_seq_ID.NEXTVAL,
+     :new.ID,
+     :new.NAME,
+     :new.SERVICETYPEID,
+     v_username,SYSDATE,'Insert');
+
+END;
+
+
+CREATE OR REPLACE TRIGGER Service_after_update
+AFTER Update
+   ON Service
+   FOR EACH ROW
+
+DECLARE
+   v_username varchar2(10);
+
+BEGIN
+
+   SELECT user INTO v_username
+   FROM dual;
+
+   INSERT INTO SERVICEAudit
+   VALUES
+   ( ServiceAudit_seq_ID.NEXTVAL,
+     :new.ID,
+     :new.NAME,
+     :new.SERVICETYPEID,
+     v_username,SYSDATE,'Update');
+
+END;
+
+
+CREATE OR REPLACE TRIGGER Service_before_delete
+Before Delete
+   ON Service
+   FOR EACH ROW
+
+DECLARE
+   v_username varchar2(10);
+
+BEGIN
+
+   SELECT user INTO v_username
+   FROM dual;
+
+   INSERT INTO SERVICEAudit
+   VALUES
+   ( ServiceAudit_seq_ID.NEXTVAL,
+     :new.ID,
+     :new.NAME,
+     :new.SERVICETYPEID,
+     v_username,SYSDATE,'Delete');
+
+END;
+

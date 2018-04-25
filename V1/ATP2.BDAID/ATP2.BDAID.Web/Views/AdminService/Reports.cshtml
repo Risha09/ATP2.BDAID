@@ -1,0 +1,62 @@
+﻿@using ATP2.BDAID.Framework.Constant
+@model List<ATP2.BDAID.Entities.ServiceAudit>
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+
+<h2>Service Reports</h2><a href="#" onclick="printDiv()" class="btn btn-info">Print</a>
+<div id="DivIdToPrint">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>SID</th>
+                <th>Service Name</th>
+                <th>Service Type</th>
+                <th>Action</th>
+                <th>ActionDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in Model)
+            {
+                <tr>
+                    <td>@service.ID</td>
+                    <td>@service.SID</td>
+                    <td>@service.Name</td>
+                    <td>@((EnumCollection.ServiceTypeEnum)service.ServiceTypeID)</td>
+                    <td>@service.ACTIONNAME</td>
+                    <td>@service.CHANGEDATE.ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts
+{
+    <script>
+        
+        function printDiv() {
+
+            var divToPrint = document.getElementById('DivIdToPrint');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
+
+        }
+
+    </script>
+}
+

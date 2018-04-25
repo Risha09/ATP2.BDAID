@@ -1,0 +1,60 @@
+﻿@using ATP2.BDAID.Framework.Constant
+@using ATP2.BDAID.Web.Framework.Util
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+<div ng-controller="AdminPostController" ng-init="Init('@Url.Content("~/")')">
+    <div ng-show="ProcessingCount>0">
+        Loading....
+    </div>
+    <br/>
+    <button type="button" class="btn btn-default btn-sm" ng-click="EidtPost()">Detail</button>
+    &nbsp;
+    <button type="button" class="btn btn-success btn-sm" ng-click="ChangeStatus(@((int)EnumCollection.PostStausEnum.Approved))">Approve</button>
+    &nbsp;
+    <button type="button" class="btn btn-danger btn-sm" ng-click="ChangeStatus(@((int)EnumCollection.PostStausEnum.Rejected))">Reject</button>
+    &nbsp;
+    @if (HttpUtil.UserProfile.Email.StartsWith("WHO"))
+    {
+        <button type="button" class="btn btn-info btn-sm" ng-click="ChangeStatus(@((int)EnumCollection.PostStausEnum.Verified))">Verify</button>
+    }
+    
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Type</td>
+                    <td>Status</td>
+                    <td>Posted By</td>
+                    <td>Post Date</td>
+                </tr>
+                <tr ng-dblclick="EidtPost()" ng-repeat="post in Posts" ng-click="ChangeRow($index)" ng-class="{'selectedRow': $index == SelectedIndex}" style="cursor: pointer">
+                    <td>{{post.ID}}</td>
+                    <td>{{post.Title}}</td>
+                    <td>{{post.Service.Name}}</td>
+                    <td>{{post.Status}}</td>
+                    <td>{{post.UserInfo.Email}}</td>
+                    <td>{{post.PostDate | date :  "dd/MM/yyyy"}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+
+</div>
+
+<style>
+    
+    .selectedRow {
+        background-color: gray
+    }
+
+</style>
+

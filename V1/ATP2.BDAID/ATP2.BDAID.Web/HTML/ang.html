@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<script src="../Scripts/jquery-1.10.2.js"></script>
+	<script src="../Scripts/bootstrap.js"></script>
+	<script src="../Scripts/respond.js"></script>
+	<link href="../Content/bootstrap.css" rel="stylesheet" />
+	<script src="../Scripts/angular 1.6.js"></script>
+</head>
+<body ng-app="apiApp">
+
+	<div class="container" ng-controller="EmployeeController" ng-init="Init()">
+		<h2>Employee Manager</h2>
+		<div ng-show="ViewID==0">
+			<input type="button" value="Add" class="btn btn-default" ng-click="AddEmployee()" />
+			<table class="table table-bordered table-hover">
+				<tr>
+					<td>
+						ID
+					</td>
+					<td>
+						Name
+					</td>
+					<td>
+						Contact
+					</td>
+					<td>
+						Edit
+					</td>
+					<td>
+						Delete
+					</td>
+				</tr>
+				<tr ng-repeat="emp in Employees">
+					<td>
+						{{emp.ID}}
+					</td>
+					<td>
+						{{emp.Name}}
+					</td>
+					<td>
+						{{emp.ContactNo}}
+					</td>
+					<td>
+						<input type="button" value="Edit" class="btn btn-info" ng-click="EditEmployee($index)" />
+					</td>
+					<td>
+						<input type="button" value="Delete" class="btn btn-danger" ng-click="DeleteEmployee($index)" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div ng-show="ViewID==1">
+
+			<div class="form-group">
+				<label>ID</label>
+				<input type="text" class="form-control" disabled="disabled" ng-model="SelectedEmployee.ID" />
+			</div>
+			<div class="form-group">
+				<label>Name</label>
+				<input type="text" class="form-control" ng-model="SelectedEmployee.Name"/>
+			</div>
+			<div class="form-group">
+				<label>Contact</label>
+				<input type="text" class="form-control" ng-model="SelectedEmployee.ContactNo"/>
+			</div>
+			<div class="form-group">
+				<label>Salary</label>
+				<input type="text" class="form-control" ng-model="SelectedEmployee.Salary"/>
+			</div>
+
+			<input type="button" value="Save" class="btn btn-info" ng-click="Save()" />
+			<input type="button" value="Back" class="btn btn-default" ng-click="Back()" />
+
+		</div>
+	</div>
+
+	<script>
+
+		var app = angular.module('apiApp', []);
+		app.controller('EmployeeController', function ($scope, $http) {
+
+			$scope.Employees = [];
+			$scope.SelectedEmployee = {};
+			$scope.ViewID = 0;
+			$scope.Init = function () {
+
+				$scope.LoadEmployees();
+
+			};
+
+			$scope.LoadEmployees = function() {
+
+				$http({
+					method: "GET",
+					url: "http://localhost:56274/api/employee2/getall"
+				}).then(
+					function mySuccess(response) {
+						$scope.Employees = response.data;
+					},
+					function myError(response) {
+						alert(response.statusText);
+					}
+				);
+
+			};
+
+			$scope.AddEmployee = function() {
+				$scope.ViewID = 1;
+				$scope.SelectedEmployee = { ID: -1, Name: "" };
+			};
+
+			$scope.EditEmployee = function(index) {
+				$scope.ViewID = 1;
+				angular.copy($scope.Employees[index], $scope.SelectedEmployee);
+			};
+
+			$scope.DeleteEmployee = function(index) {
+
+				if (!confirm("Are You Sure?"))
+					return;
+
+				$http({
+					method: "DELETE",
+					url: "http://localhost:56274/api/employee2/delete?id=" + $scope.Employees[index].ID
+				}).then(
+					function mySuccess(response) {
+						$scope.LoadEmployees();
+					},
+					function myError(response) {
+						alert(response.statusText);
+					}
+				);
+
+			};
+
+			$scope.Save = function() {
+
+				$http.post("http://localhost:56274/api/employee2/Save",$scope.SelectedEmployee)
+					.then(function(response) {
+						//First function handles success
+						$scope.ViewID = 0;
+						$scope.LoadEmployees();
+					}, function(response) {
+						//Second function handles error
+						alert("Something went wrong");
+					});
+
+			};
+
+			$scope.Back = function() {
+				$scope.ViewID = 0;
+			};
+		});
+
+	</script>
+
+</body>
+
+</html>

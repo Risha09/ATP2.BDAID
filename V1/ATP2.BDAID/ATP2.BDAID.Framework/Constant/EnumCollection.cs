@@ -97,5 +97,44 @@ namespace ATP2.BDAID.Framework.Constant
 
         #endregion
 
+        #region Post
+
+
+        public enum PostStausEnum
+        {
+            Pending = 1,
+            Approved = 2,
+            Verified=4,
+            Rejected=16
+        }
+
+        public static List<EnumDetail> GetPostStatusEnum()
+        {
+            var list = new List<EnumDetail>();
+            list.Add(new EnumDetail()
+            {
+                ID = 1,
+                Name = "Pending"
+            });
+            list.Add(new EnumDetail()
+            {
+                ID = 2,
+                Name = "Non Approved"
+            });
+            list.Add(new EnumDetail()
+            {
+                ID = 4,
+                Name = "Verified"
+            });
+            list.Add(new EnumDetail()
+            {
+                ID = 16,
+                Name = "Rejected"
+            });
+            return list;
+        }
+
+        #endregion
+
     }
 }

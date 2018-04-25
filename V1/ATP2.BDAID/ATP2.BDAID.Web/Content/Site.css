@@ -44,3 +44,9 @@ input[type="checkbox"].input-validation-error {
 .shadow_content {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.commentDiv {
+    border: 1px dotted darkgray;
+    padding: 15px;
+    border-radius: 25px;
+}

@@ -38,6 +38,16 @@ namespace ATP2.BDAID.Data
             }
         }
 
+        public static OracleCommand Command
+        {
+            get
+            {
+                var com = new OracleCommand();
+                com.Connection = Connection;
+                return com;
+            }
+        }
+
         public static DataSet GetDataSet(string query)
         {
             //create panel  to write query
@@ -65,7 +75,43 @@ namespace ATP2.BDAID.Data
         public static int ExecuteQuery(string query)
         {
             OracleCommand cmd = new OracleCommand(query, Connection);
-            return cmd.ExecuteNonQuery();
+            int i = cmd.ExecuteNonQuery();
+            Connection.Close();
+
+            return i;
+
+        }
+
+        public static int ExecuteTransactionQuery(params string[] query)
+        {
+            
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = Connection;
+
+            var trnsaction = Connection.BeginTransaction();
+            cmd.Transaction = trnsaction;
+
+            try
+            {
+                foreach (var s in query)
+                {
+                    cmd.CommandText = s;
+                    cmd.ExecuteNonQuery();
+                }
+
+                trnsaction.Commit();
+            }
+            catch (Exception e)
+            {
+                trnsaction.Rollback();
+                return 0;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return 1;
 
         }
     }

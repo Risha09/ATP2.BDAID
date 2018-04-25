@@ -40,9 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Donation.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Post.cs" />
+    <Compile Include="PostComment.cs" />
+    <Compile Include="Reg_User.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="ServiceAudit.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATP2.BDAID.Framework\ATP2.BDAID.Framework.csproj">
+      <Project>{2897E9EB-63D8-452D-9E6D-870766BC7B2B}</Project>
+      <Name>ATP2.BDAID.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -42,7 +42,10 @@
   <ItemGroup>
     <Compile Include="Account\LoginModel.cs" />
     <Compile Include="Account\RegistrationModel.cs" />
+    <Compile Include="Admin\DashboardModel.cs" />
+    <Compile Include="Admin\EmployeeModel.cs" />
     <Compile Include="Admin\ServiceModel.cs" />
+    <Compile Include="Admin\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,294 @@
+﻿
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-default" style="margin: 0;">
+			<div class="panel-heading" style="cursor: pointer" onclick="ShowMenu('menu1')">Services</div>
+			<div class="panel-body menuBody" style="display: none" id="menu1">
+				<a href="#" class="btn btn-default form-control" onclick="loadContent('../Users/Posts.html')"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Blood</a>
+				<a href="#" class="btn btn-default form-control" onclick="loadContent('../Users/Posts.html')"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Flood</a>
+				<a href="#" class="btn btn-default form-control" onclick="loadContent('../Users/Posts.html')"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Winter</a>
+			</div>
+		</div>
+		<div class="panel panel-default" style="margin: 0;">
+			<div class="panel-heading" style="cursor: pointer" onclick="loadContent('../Users/Calculate.html','Donation')">Calculate Donation</div>
+			<div class="panel-body menuBody" style="display: none" id="menu5">dasdasdasd</div>
+		</div>
+		<div class="panel panel-default" style="margin: 0;">
+			<div class="panel-heading" style="cursor: pointer" onclick="loadPageContent('../Users/NewPost2.html')">Post</div>
+			<div class="panel-body menuBody" style="display: none" id="menu2">dasdasdasd</div>
+		</div>
+		<div class="panel panel-default" style="margin: 0;">
+			<div class="panel-heading" style="cursor: pointer" onclick="loadContent('../Users/response2.html','Responses')">Responses</div>
+			<div class="panel-body menuBody" style="display: none" id="menu3">dasdasdasd</div>
+		</div>
+		<div class="panel panel-default" style="margin: 0;">
+			<div class="panel-heading" style="cursor: pointer" onclick="loadContent('../Users/email.html','Email')">Email</div>
+			<div class="panel-body menuBody" style="display: none" id="menu4">dasdasdasd</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<ul class="nav nav-tabs" role="tablist" id="tabBar">
+			<li role="presentation" id="liDash"><a href="#dashboard" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
+			<li role="presentation" class="active" id="liContainer"><a href="#postContainer" id="hContainer" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+
+		</ul>
+		<div class="tab-content" id="tabContainer">
+			<div role="tabpanel" class="tab-pane" id="dashboard">
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<div id="chartContainer1" style="height: 150px;width: 100%"></div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane active" id="postContainer">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Comment</h4>
+			</div>
+			<div class="modal-body">
+				<div id="commentDiv" style="padding-left: 15px;padding-right: 25px;height: 300px; overflow-y: auto;overflow-x: hidden">
+					<div class="row">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h4 style="color: white">sumu@aiub.edu</h4>
+								Need to donate more.
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h4 style="color: white">rahat@aiub.edu</h4>
+								I want to donate more.
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<textarea id="commentText" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a href="#" class="btn btn-primary" onclick="SendComment()">Send</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal2" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Tag</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<div class="row">
+						<div class="panel panel-default">
+							<div class="panel-body" id="tagDiv">
+								<span style="color: white">bony@aiub.edu</span>&nbsp;&nbsp;
+								<span style="color: white">risha@aiub.edu</span>&nbsp;&nbsp;
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<input type="text" id="tagText" class="form-control">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a href="#" class="btn btn-primary" onclick="AddTag()">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	function SendComment() {
+		var com = '<div class="row">' +
+			'<div class="panel panel-default">' +
+			'<div class="panel-body">' +
+			'<h4 style="color: white">guest@aiub.edu</h4>' +
+			$('#commentText').val() +
+			'</div>' +
+			'</div>' +
+			'</div>';
+		$('#commentDiv').append(com);
+		$('#commentText').val('');
+	}
+
+	function AddTag() {
+		var tag = '<span style="color: white">' + $('#tagText').val() + '</span>&nbsp;&nbsp;';
+		$('#tagDiv').append(tag);
+		$('#tagText').val('');
+	}
+
+</script>
+
+<style>
+	#snackbar {
+		visibility: hidden; /* Hidden by default. Visible on click */
+		min-width: 250px; /* Set a default minimum width */
+		margin-left: -125px; /* Divide value of min-width by 2 */
+		background-color: #333; /* Black background color */
+		color: #fff; /* White text color */
+		text-align: center; /* Centered text */
+		border-radius: 2px; /* Rounded borders */
+		padding: 16px; /* Padding */
+		position: fixed; /* Sit on top of the screen */
+		z-index: 1; /* Add a z-index if needed */
+		left: 50%; /* Center the snackbar */
+		bottom: 30px; /* 30px from the bottom */
+	}
+
+		/* Show the snackbar when clicking on a button (class added with JavaScript) */
+		#snackbar.show {
+			visibility: visible; /* Show the snackbar */
+			/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+			-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+			animation: fadein 0.5s, fadeout 0.5s 2.5s;
+		}
+
+	/* Animations to fade the snackbar in and out */
+	@-webkit-keyframes fadein {
+		from {
+			bottom: 0;
+			opacity: 0;
+		}
+
+		to {
+			bottom: 30px;
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadein {
+		from {
+			bottom: 0;
+			opacity: 0;
+		}
+
+		to {
+			bottom: 30px;
+			opacity: 1;
+		}
+	}
+
+	@-webkit-keyframes fadeout {
+		from {
+			bottom: 30px;
+			opacity: 1;
+		}
+
+		to {
+			bottom: 0;
+			opacity: 0;
+		}
+	}
+
+	@keyframes fadeout {
+		from {
+			bottom: 30px;
+			opacity: 1;
+		}
+
+		to {
+			bottom: 0;
+			opacity: 0;
+		}
+	}
+</style>
+
+<script>
+
+	function myFunction() {
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+		setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
+	}
+
+	function loadContent(url, name) {
+
+		if (!name)
+			name = 'Home';
+
+		$('#hContainer').text(name);
+		$("#postContainer").load(url);
+
+		$('#liDash').removeClass('active');
+		$('#dashboard').removeClass('active');
+		$('#liContainer').addClass('active');
+		$('#postContainer').addClass('active');
+	}
+
+	var lastMenu = '';
+	function ShowMenu(menu) {
+		$(".menuBody").hide("fast", function () {
+		});
+
+		if (lastMenu != menu) {
+			$("#" + menu).toggle(500,
+				function () {
+					// do something once the element is shown/hidden
+				});
+			lastMenu = menu;
+		}
+		else
+			lastMenu = '';
+
+	}
+
+	$(document).ready(function () {
+
+		$("#postContainer").load("../Users/posts.html");
+
+		var options = {
+			title: {
+				text: "Your Activities"
+			},
+			animationEnabled: true,
+			data: [{
+				type: "pie",
+				startAngle: 40,
+				toolTipContent: "<b>{label}</b>: {y}%",
+				showInLegend: "true",
+				legendText: "{label}",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - {y}%",
+				dataPoints: [
+					{ y: 30, label: "Blood" },
+					{ y: 20, label: "Flood" },
+					{ y: 15, label: "Winter" },
+					{ y: 10, label: "Responses" },
+					{ y: 9, label: "Comments" },
+					{ y: 8, label: "Tags" },
+					{ y: 8, label: "Visits" }
+				]
+			}]
+		};
+		$("#chartContainer1").CanvasJSChart(options);
+
+	});
+
+</script>
+
+

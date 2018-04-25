@@ -103,9 +103,13 @@ namespace ATP2.BDAID.Web.Controllers
 
             var userprofileJson = JsonConvert.SerializeObject(userprofile);
             FormsAuthentication.SetAuthCookie(userprofileJson,false);
-            if (result.Data.UserTypeID == (int)EnumCollection.UserTypeEnum.Admin)
+            if (result.Data.UserTypeID == (int)EnumCollection.UserTypeEnum.Admin || result.Data.UserTypeID == (int)EnumCollection.UserTypeEnum.Employee)
             {
                 return RedirectToAction("Index", "AdminHost");
+            }
+            if (result.Data.UserTypeID == (int)EnumCollection.UserTypeEnum.RegisteredUser)
+            {
+                return RedirectToAction("Index", "RegisteredHost");
             }
             return View(model);
         }

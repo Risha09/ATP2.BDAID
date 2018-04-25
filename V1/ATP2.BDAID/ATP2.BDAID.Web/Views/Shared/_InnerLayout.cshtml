@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="padding: 0">
+<body style="padding: 0" ng-app="bdApp">
     <div class="container-fluid body-content">
         @RenderBody()
     </div>
@@ -15,6 +15,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    <script src="~/Scripts/angular-chart.js"></script>
+    <script src="~/Scripts/controller/app.js"></script>
+    <script src="~/Scripts/controller/AllController.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

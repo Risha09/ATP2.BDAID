@@ -44,5 +44,71 @@ namespace ATP2.BDAID.Web.Framework.Base
                 return _serviceTypeService;
             }
         }
+
+        private static EmployeeService _EmployeeService;
+        public static EmployeeService EmployeeService
+        {
+            get
+            {
+                if (_EmployeeService == null)
+                    _EmployeeService = new EmployeeService();
+                return _EmployeeService;
+            }
+        }
+
+        private static Reg_UserService _Reg_UserService;
+        public static Reg_UserService Reg_UserService
+        {
+            get
+            {
+                if (_Reg_UserService == null)
+                    _Reg_UserService = new Reg_UserService();
+                return _Reg_UserService;
+            }
+        }
+
+        private static PostService _PostService;
+        public static PostService PostService
+        {
+            get
+            {
+                if (_PostService == null)
+                    _PostService = new PostService();
+                return _PostService;
+            }
+        }
+
+        private static DonationService _DonationService;
+        public static DonationService DonationService
+        {
+            get
+            {
+                if (_DonationService == null)
+                    _DonationService = new DonationService();
+                return _DonationService;
+            }
+        }
+
+        private static PostCommentService _PostCommentService;
+        public static PostCommentService PostCommentService
+        {
+            get
+            {
+                if (_PostCommentService == null)
+                    _PostCommentService = new PostCommentService();
+                return _PostCommentService;
+            }
+        }
+
+        private static ServiceAuditService _ServiceAuditService;
+        public static ServiceAuditService ServiceAuditService
+        {
+            get
+            {
+                if (_ServiceAuditService == null)
+                    _ServiceAuditService = new ServiceAuditService();
+                return _ServiceAuditService;
+            }
+        }
     }
 }

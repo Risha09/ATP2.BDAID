@@ -1,0 +1,59 @@
+﻿<div class="panel panel-default">
+	<div class="panel-heading">Donate</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-12" style="margin-left: 10px; margin-right: 10px">
+				<div class="row">
+					<div class="col-md-9">
+						<input class="form-control" type="text" name="notification" placeholder="Search By Id"/>
+					</div>
+					<div class="col-md-3">
+						<input type="button" class="btn btn-info form-control" value="Search" onclick="ShowDiv()" />
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-hover table-bordered table-responsive" id="resDiv" style="display: none">
+							<tr>
+								<th></th>
+								<th>Email</th>
+								<th>Date</th>
+								<th>Organisation</th>
+								<th>Amount</th>
+							</tr>
+							<tr>
+								<th>1</th>
+								<th>rahatrahman@gmail.com</th>
+								<th>23-03-2018</th>
+								<th>Merycom Intl.</th>
+								<th>1,00tk</th>
+							</tr>
+							<tr>
+								<th>2</th>
+								<th>sumaiya@gmail.com</th>
+								<th>23-03-2018</th>
+								<th>Aiub shomoy club</th>
+								<th>11,00tk</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+
+	function ShowDiv() {
+
+		$("#resDiv").show("slow", function () {
+		});
+
+	}
+
+
+</script>

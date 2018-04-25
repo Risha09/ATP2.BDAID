@@ -1,0 +1,27 @@
+﻿@using ATP2.BDAID.Web.Framework.Util
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body ng-app="bdApp">
+
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    <script src="~/Scripts/angular-chart.js"></script>
+    <script src="~/Scripts/controller/app.js"></script>
+    <script src="~/Scripts/controller/AllController.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

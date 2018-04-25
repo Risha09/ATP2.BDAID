@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+<div class="row" ng-controller="RDashboardController" ng-init="Init('@Url.Content("~/")')" align="center">
+    <table style="width: 90%">
+        <tr>
+            <td style="width: 45%">
+                <div class="panel panel-default">
+                    <div class="panel-heading">All User Posts</div>
+                    <div class="panel-body">
+                        <canvas id="pie" class="chart chart-pie"
+                                chart-data="dataPosts" chart-labels="labelPosts" chart-options="options"></canvas>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 10%">&nbsp;</td>
+            <td style="width: 45%">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Personal Posts</div>
+                    <div class="panel-body" style="background-color: white">
+                        <canvas id="pie" class="chart chart-pie"
+                                chart-data="dataCurrentPosts" chart-labels="labelCurrentPosts" chart-options="options"></canvas>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+</div>
+

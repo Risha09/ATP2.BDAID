@@ -1,0 +1,22 @@
+CREATE PROCEDURE insertEmployeeUserInfo(
+	   UserID IN UserInfo.ID%TYPE,
+	   UName IN UserInfo.NAME%TYPE,
+	   UEmail IN UserInfo.Email%TYPE,
+	   UUserTypeID IN UserInfo.UserTypeID%TYPE,
+	   UStatusID IN UserInfo.StatusID%TYPE,
+	   EDOB IN Employee.Contact%TYPE,
+	   ESalary IN Employee.Salary%TYPE,
+	   EContact IN Employee.Contact%TYPE,
+	   EGender IN Employee.Gender%TYPE)
+IS
+BEGIN
+
+  INSERT INTO UserInfo VALUES (UserID,UName,UEmail,UUserTypeID,UStatusID);
+  INSERT INTO Employee VALUES (UserID,TO_DATE(EDOB,'yyyy/mm/dd',ESalary,EContact,EGender));
+
+  COMMIT;
+
+END;
+
+
+select uname into name from userinfo where ID=USERS_rec.id;
