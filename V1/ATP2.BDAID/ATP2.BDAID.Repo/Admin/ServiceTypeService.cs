@@ -91,6 +91,30 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
+        public List<Service> GetPostCount()
+        {
+            var result = new List<Service>();
+            try
+            {
+                string query = "select ID,Name,TotalPostsByService(ID) as SERVICETYPEID  from Service";
+                var dt = DataAccess.GetDataTable(query);
+
+                if (dt != null && dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Service u = ConvertToEntity(dt.Rows[i]);
+                        result.Add(u);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
         public Result<Service> GetByID(int id)
         {
             var result = new Result<Service>();

@@ -109,47 +109,6 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
-        public int GetPostCount(int sid)
-        {
-            try
-            {
-                //var cmd = DataAccess.Command;
-
-                //cmd.CommandText = "TotalPostsByService";
-                //cmd.CommandType = CommandType.StoredProcedure;
-
-                //cmd.Parameters.Add("sid", OracleDbType.Decimal, ParameterDirection.Input).Value = sid;
-                //cmd.Parameters.Add("total", OracleDbType.Decimal, ParameterDirection.Output);
-
-                //cmd.ExecuteNonQuery();
-
-                //string t = cmd.Parameters["total"].Value.ToString();
-                //var total = Int32.Parse(t);
-                //return total;
-                string query = "select * from Post where ServiceID=" + sid;
-                var dt = DataAccess.GetDataTable(query);
-
-                if (dt == null || dt.Rows.Count == 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    query = "BEGIN TotalPostsByService(sid); END;";
-
-                }
-
-
-                DataAccess.ExecuteQuery(query);
-                return Int32.Parse(query);
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
-
-        }
-
         public Result<Post> UpdateStatus(int id, int statusID)
         {
             var result = new Result<Post>();

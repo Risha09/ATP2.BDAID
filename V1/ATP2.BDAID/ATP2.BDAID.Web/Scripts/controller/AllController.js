@@ -222,27 +222,6 @@ app.controller('DashboardController', function ($scope, $http) {
 					    alert(response.statusText);
 					}
 				);
-
-        $scope.ProcessingCount++;
-        $http({
-            method: "GET",
-            url: $scope.RootUrl + "api/dashboard2/GetPosts"
-        }).then(
-					function mySuccess(response) {
-
-					    var result = response.data;
-					    $scope.labelPostts = result.Labels;
-					    $scope.dataPostts = result.Datas;
-					},
-					function myError(response) {
-					    $scope.ProcessingCount--;
-					    alert(response.statusText);
-					}
-				);
-
-
-       
-
     };
 
     $scope.LoadBarCharts = function() {
@@ -300,23 +279,6 @@ app.controller('RDashboardController', function ($scope, $http) {
 					    $scope.dataPosts = result.Datas;
 
 					    $scope.LoadPieCharts();
-					},
-					function myError(response) {
-					    $scope.ProcessingCount--;
-					    alert(response.statusText);
-					}
-				);
-
-        $scope.ProcessingCount++;
-        $http({
-            method: "GET",
-            url: $scope.RootUrl + "api/dashboard2/GetPosts"
-        }).then(
-					function mySuccess(response) {
-
-					    var result = response.data;
-					    $scope.labelPostts = result.Labels;
-					    $scope.dataPostts = result.Datas;
 					},
 					function myError(response) {
 					    $scope.ProcessingCount--;

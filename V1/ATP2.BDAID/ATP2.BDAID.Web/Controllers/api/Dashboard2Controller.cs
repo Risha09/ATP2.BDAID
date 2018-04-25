@@ -16,7 +16,7 @@ namespace ATP2.BDAID.Web.Controllers.api
     public class Dashboard2Controller : BaseApiController
     {
         [HttpGet]
-        public DashboardModel GetPosts()
+        public DashboardModel GetPosts2()
         {
             var model = new DashboardModel()
             {
@@ -24,12 +24,12 @@ namespace ATP2.BDAID.Web.Controllers.api
                 Datas = new List<int>()
             };
 
-            var services = ServiceTypeService.GetAll();
+            var services = ServiceTypeService.GetPostCount();
 
             foreach (var s in services)
             {
                 model.Labels.Add(s.Name);
-                model.Datas.Add(PostService.GetPostCount(s.ID));
+                model.Datas.Add(s.ServiceTypeID);
             }
 
             return model;
@@ -77,26 +77,6 @@ namespace ATP2.BDAID.Web.Controllers.api
             return model;
         }
 
-        [HttpGet]
-        public DashboardModel GetPosts2()
-        {
-            var model = new DashboardModel()
-            {
-                Labels = new List<string>(),
-                Datas = new List<int>()
-            };
-
-            var list = PostService.GetAll();
-            var services = ServiceTypeService.GetAll();
-
-            foreach (var s in services)
-            {
-                model.Labels.Add(s.Name);
-                model.Datas.Add(list.Count(l => l.ServiceID == s.ID));
-            }
-
-            return model;
-        }
 
         [HttpGet]
         public DashboardModel GetPosts2ByCurrentUser()
