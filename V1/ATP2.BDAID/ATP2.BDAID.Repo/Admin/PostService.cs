@@ -234,6 +234,31 @@ namespace ATP2.BDAID.Services.Admin
             return result;
         }
 
+        public Result<Post> UpdateSupport(int id)
+        {
+            var result = new Result<Post>();
+            try
+            {
+                string query = "update post set supported=supported+1 where ID=" + id;
+                result.HasError = DataAccess.ExecuteQuery(query) <= 0;
+
+                if (result.HasError)
+                    result.Message = "Something Went Wrong";
+                else
+                {
+                    result = GetByID(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+
+            return result;
+            // 
+        }
+
         public bool Delete(int id)
         {
             var result = new Result<Post>();

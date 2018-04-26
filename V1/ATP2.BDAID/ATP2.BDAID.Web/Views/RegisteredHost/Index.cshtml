@@ -7,6 +7,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_RUAuthorizeLayout.cshtml";
     var services = (List<Service>) ViewBag.Services;
+    int tid = (int) ViewBag.ID;
 }
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -35,6 +36,8 @@
                         }
                     </ul>
                 </li>
+                <li><a href="@Url.Action("Index","RegisteredHost",new{id=1})">Mugger</a></li>
+                <li><a href="@Url.Action("Index","RegisteredHost",new{id=2})">Seeker</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li> @Html.ActionLink("Welcome, " + HttpUtil.UserProfile.Name, "Index", "RegisteredHost")</li>
@@ -49,9 +52,17 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","RegisteredHost")','Profile')">Profile</a>
-                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Donations","RegisteredPost")', 'Donations')">Donations</a>
+                @if (tid == 1)
+                {
+                    <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Donations","RegisteredPost")', 'Donations')">Donations</a>
+                }
+                
                 <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("NewPost", "RegisteredPost")','Post')">Post</a>
-                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Response", "RegisteredPost")','Posts')">Response</a>
+                @if (tid == 2)
+                {
+                    <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Response", "RegisteredPost")','Posts')">Response</a>
+                }
+
                 @*<a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Message')">Message Box</a>*@
             </div>
         </div>

@@ -15,5 +15,6 @@ namespace ATP2.BDAID.Services2.Interfaces
         List<Post> GetAllByUserId(int userId);
         Result<Post> Insert(Post post);
         Result<Post> UpdateStatus(int id, int statusID);
+        Result<Post> UpdateSupport(int id);
     }
 }

@@ -17,8 +17,12 @@ namespace ATP2.BDAID.Web.Controllers
     {
         //
         // GET: /RegisteredUser/Host/
-        public ActionResult Index()
+        public ActionResult Index(int id=-1)
         {
+            if (id == -1)
+                id = 1;
+
+            ViewBag.ID = id;
             ViewBag.Services = ServiceTypeService.GetAll();
             return View();
         }

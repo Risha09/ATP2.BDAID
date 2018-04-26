@@ -34,6 +34,11 @@ namespace ATP2.BDAID.Web.Controllers
             return View();
         }
 
+        public ActionResult NewDonation(int pid)
+        {
+            return View();
+        }
+
         public ActionResult NewPost()
         {
             return View();

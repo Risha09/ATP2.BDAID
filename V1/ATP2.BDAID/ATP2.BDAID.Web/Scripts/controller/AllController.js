@@ -4,7 +4,7 @@
     $scope.SelectedIndex = -1;
     $scope.ProcessingCount = 0;
 
-    
+
 
     //List Page
 
@@ -13,7 +13,7 @@
         $scope.LoadPosts();
     };
 
-    $scope.EidtPost = function() {
+    $scope.EidtPost = function () {
 
         if ($scope.SelectedIndex == -1) {
             alert('Please Select a row first');
@@ -47,7 +47,7 @@
 					function mySuccess(response) {
 					    $scope.ProcessingCount--;
 					    var result = response.data;
-					    
+
 					    if (result.HasError) {
 					        alert(result.Message);
 					        return;
@@ -86,7 +86,7 @@
 
     };
 
-    $scope.ChangeRow = function(index) {
+    $scope.ChangeRow = function (index) {
         $scope.SelectedIndex = index;
     }
 
@@ -100,7 +100,7 @@ app.controller('AdminDetailPostController', function ($scope, $http) {
 
     //List Page
 
-    $scope.InitEdit = function (url,id) {
+    $scope.InitEdit = function (url, id) {
         $scope.RootUrl = url;
         $scope.PostID = id;
         $scope.LoadPost();
@@ -131,7 +131,7 @@ app.controller('AdminDetailPostController', function ($scope, $http) {
 
 					    $scope.Post = result.Data;
 					    $scope.LoadComments();
-					    
+
 					},
 					function myError(response) {
 					    $scope.ProcessingCount--;
@@ -224,7 +224,7 @@ app.controller('DashboardController', function ($scope, $http) {
 				);
     };
 
-    $scope.LoadBarCharts = function() {
+    $scope.LoadBarCharts = function () {
 
 
         $scope.ProcessingCount++;
@@ -323,7 +323,7 @@ app.controller('RegisteredPostController', function ($scope, $http) {
 
     //List Page
 
-    $scope.Init = function (url,sid) {
+    $scope.Init = function (url, sid) {
         $scope.RootUrl = url;
         $scope.SID = sid;
         $scope.LoadPosts();
@@ -390,6 +390,44 @@ app.controller('RegisteredPostController', function ($scope, $http) {
         $scope.ProcessingCount++;
         $http.post($scope.RootUrl + "api/PostComment2/SaveComment", comment, { headers: { 'Content-Type': 'application/json' } })
             .then(function (response) {
+                $scope.ProcessingCount--;
+                var result = response.data;
+
+                if (result.HasError) {
+                    alert(result.Message);
+                    return;
+                }
+
+                if ($scope.Comments == null)
+                    $scope.Comments = [];
+
+                $scope.Comments.splice(0, 0, result.Data);
+                $scope.Message = '';
+
+            }, function (response) {
+                $scope.ProcessingCount--;
+                alert('error');
+            });
+
+    };
+
+    $scope.Donate = function (post) {
+        window.location.href = $scope.RootUrl + "RegisteredPost/NewDonation/?pid=" + post.ID;
+    };
+
+    $scope.ChangeSupported = function (post) {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
+        
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/Post2/UpdateSupported",
+            params: { id: post.ID }
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
 
                 var result = response.data;
 
@@ -398,24 +436,14 @@ app.controller('RegisteredPostController', function ($scope, $http) {
                     return;
                 }
 
-                $scope.Comments.splice(0, 0, result.Data);
-                $scope.Message = ''
+                post.Supported++;
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
 
-            }, function (response) {
-                alert('error');
-            });
-
-    };
-
-    $scope.Donate = function() {
-        alert('Not Implemented Yet.');
-    };
-
-    $scope.ChangeSupported = function (post) {
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
-        post.Supported++;
     };
 
     $scope.ChangeRow = function (index) {
@@ -443,9 +471,9 @@ app.controller('RegisteredDetailPostController', function ($scope, $http) {
 
     };
 
-    $scope.NewPost = function() {
+    $scope.NewPost = function () {
 
-        $scope.Post = {ServiceID:2};
+        $scope.Post = { ServiceID: 2 };
         $scope.ProcessingCount++;
         $http({
             method: "GET",

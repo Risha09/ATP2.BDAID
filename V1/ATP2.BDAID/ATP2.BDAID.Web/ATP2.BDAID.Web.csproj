@@ -244,6 +244,7 @@
     <Content Include="Views\RegisteredPost\NewPost.cshtml" />
     <Content Include="Views\RegisteredPost\Response.cshtml" />
     <Content Include="Views\AdminService\Reports.cshtml" />
+    <Content Include="Views\RegisteredPost\NewDonation.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -43,6 +43,12 @@ namespace ATP2.BDAID.Web.Controllers.api
             return PostService.UpdateStatus(id, statusId);
         }
 
+        [HttpGet]
+        public Result<Post> UpdateSupported(int id)
+        {
+            return PostService.UpdateSupport(id);
+        }
+
         [HttpPost]
         public Result<Post> Save(Post post)
         {
