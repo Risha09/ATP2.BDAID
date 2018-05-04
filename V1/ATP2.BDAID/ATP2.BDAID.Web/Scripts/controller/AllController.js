@@ -604,8 +604,10 @@ app.controller('RegisteredDonationController', function ($scope, $http) {
     //List Page
 
     $scope.Init = function (url, id) {
+
         $scope.RootUrl = url;
         $scope.UserID = id;
+        
         $scope.Load();
     };
 
@@ -613,7 +615,7 @@ app.controller('RegisteredDonationController', function ($scope, $http) {
         $scope.ProcessingCount++;
         $http({
             method: "GET",
-            url: $scope.RootUrl + "api/Donation2/GetByUserID()",
+            url: $scope.RootUrl + "api/Donation2/GetByUserID",
             params: { uid: $scope.UserID }
         }).then(
             function mySuccess(response) {

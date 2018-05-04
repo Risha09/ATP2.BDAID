@@ -26,8 +26,8 @@ namespace ATP2.BDAID.Services.Admin
                 {
                     value.ID = GetID();
                     var date = Convert.ToDateTime(System.DateTime.Now);
-                    //query = "insert into Donation values(" + value.ID + "," + date + ",'" + value.Type + "','" + value.Amount + "','" + value.PostID + "','" + value.UserID + "','" + value.Transaction + "','" + value.Mobile + "')";
-                    query = "insert into Donation values(1,23-JAN-19,'Bkash',1000.0,3,4,547897,0987654567)";
+                    query = "insert into Donation values(" + value.ID + ",SYSDATE,'" + value.Type + "'," + value.Amount + "," + value.PostID + "," + value.UserID + "," + value.Transaction + "," + value.Mobile + ")";
+                    //query = "insert into Donation values(1,23-JAN-19,'Bkash',1000.0,3,4,547897,0987654567)";
                 }
 
                 result.HasError = DataAccess.ExecuteQuery(query) <= 0;
@@ -157,7 +157,7 @@ namespace ATP2.BDAID.Services.Admin
                 u.Transaction = Int32.Parse(row["TRANSACTION"].ToString());
                 return u;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }
