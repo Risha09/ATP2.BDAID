@@ -24,7 +24,6 @@ namespace ATP2.BDAID.Web.Controllers
         // GET: /Account/
         public ActionResult Registration()
         {
-           
             var model = new RegistrationModel();
             return View(model);
         }

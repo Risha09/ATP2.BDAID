@@ -9,11 +9,12 @@ namespace ATP2.BDAID.Entities
     public class Donation
     {
         public int ID { get; set; }
-        public DateTime DONATEDATE { get; set; }
+        public DateTime DonateDate { get; set; }
         public string Type { get; set; }
-        public float AMOUNT { get; set; }
-        public int POSTID { get; set; }
-        public int USERID { get; set; }
-        public string UserEmail { get; set; }
+        public float Amount { get; set; }
+        public int PostID { get; set; }
+        public int UserID { get; set; }
+        public int Mobile { get; set; }
+        public int Transaction { get; set; }
     }
 }

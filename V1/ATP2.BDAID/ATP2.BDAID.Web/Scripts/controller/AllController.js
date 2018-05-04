@@ -594,3 +594,37 @@ app.controller('RegisteredDetailPostController', function ($scope, $http) {
 
     };
 });
+
+app.controller('RegisteredDonationController', function ($scope, $http) {
+
+    $scope.RootUrl = "";
+    $scope.ProcessingCount = 0;
+    $scope.UserID = 0;
+
+    //List Page
+
+    $scope.Init = function (url, id) {
+        $scope.RootUrl = url;
+        $scope.UserID = id;
+        $scope.Load();
+    };
+
+    $scope.Load = function () {
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/Donation2/GetByUserID()",
+            params: { uid: $scope.UserID }
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
+                $scope.DonationsList = response.data;
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
+
+    };
+});

@@ -1,8 +1,101 @@
-﻿
+﻿@model ATP2.BDAID.Entities.Donation
+
 @{
     ViewBag.Title = "NewDonation";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<h2>NewDonation</h2>
+@using (Html.BeginForm("NewDonation"))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Donate</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-dismissible alert-info">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Look up!</strong> You are one step away from donating.<br />Please select you paytype.
+                    </div>
+                    <div style="margin-left: 20px; margin-right: 20px" class="form-horizontal">
+                        <div class="form-group">
+                            <label>Pay With:</label>
+                            <div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" onclick=" Bkash() " value="option1">
+                                        Bkash
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" onclick=" Bank() " value="option2">
+                                        Bank account
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="bkashContent" style="display: none">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Mobile)
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Mobile)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Amount)
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Amount)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Transaction)
+                                @Html.TextBoxFor(m => m.Transaction, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Transaction)
+                            </div>
+                            <div class="form-group">
+                                @Html.HiddenFor(m => m.PostID)
+                                @Html.HiddenFor(m => m.PostID, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PostID)
+                            </div>
+                            <div class="form-group">
+                                @Html.HiddenFor(m => m.UserID)
+                                @Html.HiddenFor(m => m.UserID, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.UserID)
+                            </div>
+                            <button type="submit" class="btn btn-success" value="Send">Send</button>
+                            <a href="@Url.Action("Index", "RegisteredPost", new {sid = -1})" class="btn btn-danger">Cancel</a>
+                        </div>
+                        <div id="bankContent" style="display: none">
+                            <div>
+                                <img src="../../Content/Images/online-payment.jpg" class="img-rounded" style="width: 100%; height: 150px" />
+                            </div><br />
+                            <a href="@Url.Action("Index", "RegisteredPost", new {sid = -1})" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+	function Bkash() {
+
+		$("#bankContent").hide("slow", function () {
+		});
+		$("#bkashContent").show("slow", function () {
+		});
+
+	}
+
+	function Bank() {
+
+		$("#bkashContent").hide("slow", function () {
+		});
+		$("#bankContent").show("slow", function () {
+		});
+	}
+
+</script>
+
 

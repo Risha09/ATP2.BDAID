@@ -4,5 +4,52 @@
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<h2>Donations</h2>
+<div ng-controller="RegisteredDonationController" ng-init="Init('@Url.Content("~/")',@ViewBag.ID)">
+    <div class="panel panel-default">
+        <div class="panel-heading">Donations</div>
+        <div class="panel-body">
+            <div ng-show="ProcessingCount>0">
+                Loading....
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-left: 10px; margin-right: 10px">
+
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-hover table-bordered table-responsive" id="resDiv" ng-show="DonationsList.length>0">
+                                <tr>
+                                    <th>Post ID</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                                <tr ng-repeat="don in DonationsList">
+                                    <th>{{don.PostID}}</th>
+                                    <th>{{don.Type}}</th>
+                                    <th>{{don.DonateDate | date :  "dd/MM/yyyy"}}</th>
+                                    <th>{{don.Amount}}</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+
+        function ShowDiv() {
+
+            $("#resDiv").show("slow", function () {
+            });
+
+        }
+
+
+    </script>
+
 

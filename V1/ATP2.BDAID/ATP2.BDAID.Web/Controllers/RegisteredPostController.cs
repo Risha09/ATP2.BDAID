@@ -31,12 +31,44 @@ namespace ATP2.BDAID.Web.Controllers
 
         public ActionResult Donations()
         {
+            ViewBag.ID = HttpUtil.UserProfile.ID;
             return View();
         }
 
         public ActionResult NewDonation(int pid)
         {
-            return View();
+            var model = new Donation();
+            model.PostID = pid;
+            model.UserID = HttpUtil.UserProfile.ID;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult NewDonation(Donation donation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(donation);
+            }
+
+            var donations = new Donation()
+            {
+                Mobile = donation.Mobile,
+                Amount = donation.Amount,
+                Transaction = donation.Transaction,
+                UserID = donation.UserID,
+                PostID = donation.PostID,
+                Type = "Bkash"
+            };
+
+            var result = DonationService.Save(donations);
+
+            if (result.HasError)
+            {
+                ViewBag.Error = result.Message;
+                return View(donation);
+            }
+
+            return RedirectToAction("Index", "RegisteredPost", new { sid = -1 });
         }
 
         public ActionResult NewPost()
