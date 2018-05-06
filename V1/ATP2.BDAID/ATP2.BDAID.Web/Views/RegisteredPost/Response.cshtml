@@ -1,8 +1,67 @@
-﻿
+﻿@using ATP2.BDAID.Web.Framework.Util
 @{
     ViewBag.Title = "Response";
     Layout = "~/Views/Shared/_InnerLayout.cshtml";
 }
 
-<h2>Response</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">Donate</div>
+    <div class="panel-body">
+        <div class="row" ng-controller="RegisteredResponseController" ng-init="Init('@Url.Content("~/")',@HttpUtil.UserProfile.ID)">
+            <div class="col-md-12" style="margin-left: 10px; margin-right: 10px">
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td>
+                                Posts :
+                            </td>
+                            <td style="width: 200px">
+                                <select name="postnput" class="form-control" ng-model="SelectedPostID" ng-options="b.ID as b.Title for b in PostList"></select>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-info" value="Search" ng-click="LoadResponses()">Search</button>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12" ng-show="ProcessingCount>0">Loading....</div>
+                    <div class="col-md-12">
+                        <table class="table table-striped table-hover table-bordered table-responsive" id="resDiv">
+                            <tr>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                            <tr ng-repeat="res in ResponseList">
+                                <th>{{res.Email}}</th>
+                                <th>{{res.DonateDate | date :  "dd/MM/yyyy"}}</th>
+                                <th>{{res.Amount}}</th>
+                            </tr>
+                            <tr ng-show="ResponseList.length==0">
+                                <td colspan="3">No Responses To Show</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    function ShowDiv() {
+
+        $("#resDiv").show("slow", function () {
+        });
+
+    }
+
+
+</script>
+
 

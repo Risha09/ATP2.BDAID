@@ -14,5 +14,6 @@ namespace ATP2.BDAID.Services2.Interfaces
     public interface IUserInfoService:IBaseService<UserInfo>
     {
         Result<UserInfo> Login(string email, string password);
+        Result<UserInfo> Login2(string email);
     }
 }

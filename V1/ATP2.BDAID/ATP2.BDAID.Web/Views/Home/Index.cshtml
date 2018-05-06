@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ATP2.BDAID.Model.Account.LoginModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,30 +7,39 @@
 <link href="~/Content/WelcomePage.css" rel="stylesheet" />
 
 @*<div class="spacee">
-    <h1 style="colour:white; font-size:55px"><span class="tabb">Come, Donate, Smile </span></h1>
-    <span class="tabb">
-        <blockquote>
-            <p style="colour:FFFFFF; font-size:30px"> Donation is the Greatest Act of Grace.</p>
-            <small>Charles Dickens<cite title="Source Title"></cite></small>
-        </blockquote>
-    </span>
-</div>
-
-
-<div class="wrap">
-    <div class="search">
-        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-        <a class="searchButton" href="NonRegistered/Index.html">
-            Search <i class="fa fa-search"></i>
-        </a>
+        <h1 style="colour:white; font-size:55px"><span class="tabb">Come, Donate, Smile </span></h1>
+        <span class="tabb">
+            <blockquote>
+                <p style="colour:FFFFFF; font-size:30px"> Donation is the Greatest Act of Grace.</p>
+                <small>Charles Dickens<cite title="Source Title"></cite></small>
+            </blockquote>
+        </span>
     </div>
-</div>
 
-<span class="tabb" style="margin: 4.0em 45em ;">
-    <a href="NonRegistered/Index.html" class="btn btn-warning">Services</a>
-</span>*@
-<br/><br /><br />
+
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <a class="searchButton" href="NonRegistered/Index.html">
+                Search <i class="fa fa-search"></i>
+            </a>
+        </div>
+    </div>
+
+    <span class="tabb" style="margin: 4.0em 45em ;">
+        <a href="NonRegistered/Index.html" class="btn btn-warning">Services</a>
+    </span>*@
+<br /><br /><br />
 <div>
+    <div class="col-md-12">
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oh snap!</strong> @ViewBag.Error
+        </div>
+        }
+    </div>
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <h1 style="color: white; font-size:35px"><span>Come, Donate, Smile </span></h1>
@@ -37,7 +47,21 @@
             <p style="color: #FFFFFF; font-size:20px"> Donation is the Greatest Act of Grace.</p>
             <small>Charles Dickens<cite title="Source Title"></cite></small>
         </blockquote>
-        <a href="@Url.Action("Login","Account")" class="btn btn-warning">Sign In</a>
+        @using (Html.BeginForm("Index"))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Please enter your Email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                    @Html.HiddenFor(m => m.Password)
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" value="Get Started" class="form-control btn btn-warning">Get Started</button>
+                </div>
+            </div>
+
+        }
+
     </div>
     <div class="col-md-3"></div>
 </div>

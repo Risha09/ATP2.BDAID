@@ -16,7 +16,7 @@ namespace ATP2.BDAID.Framework.Constant
             Admin=1,
             Employee=2,
             RegisteredUser=4,
-            NonRegisteredUder=16
+            NonRegisteredUser=16
         }
 
         public static List<EnumDetail> GetUserTypeEnum()

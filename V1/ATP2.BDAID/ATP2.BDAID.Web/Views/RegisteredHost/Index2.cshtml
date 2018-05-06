@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("Index","RegisteredHost")">BDAid</a>
+            <a class="navbar-brand" href="@Url.Action("Index2","RegisteredHost")">BDAid</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -36,8 +36,8 @@
                         }
                     </ul>
                 </li>
-                <li><a href="@Url.Action("Index","RegisteredHost",new{id=1})">Mugger</a></li>
-                <li><a href="@Url.Action("Index","RegisteredHost",new{id=2})">Collaborator</a></li>
+                <li><a href="@Url.Action("Index2","RegisteredHost",new{id=1})">Mugger</a></li>
+                <li><a href="@Url.Action("Index2","RegisteredHost",new{id=2})">Collaborator</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li> @Html.ActionLink("Welcome, " + HttpUtil.UserProfile.Name, "Index", "RegisteredHost")</li>
@@ -55,7 +55,7 @@
                 @if (tid == 1)
                 {
                     <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("NewPost", "RegisteredPost")','Post')">Post</a>
-    <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Response", "RegisteredPost")','Responses')">Response</a>
+                    <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Response", "RegisteredPost")','Responses')">Response</a>
                 }
 
                 @*<a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("NewPost", "RegisteredPost")','Post')">Post</a>*@
@@ -69,14 +69,11 @@
         </div>
         <div class="col-md-9">
             <ul class="nav nav-tabs" role="tablist" id="tabBar">
-                <li role="presentation" id="liDash" class="active"><a href="#dashboard" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
-                <li role="presentation" id="liContainer"><a href="#postContainer" id="hContainer" aria-controls="home" role="tab" data-toggle="tab">Profile</a></li>
+                
+                <li role="presentation" id="liContainer" class="active"><a href="#postContainer" id="hContainer" aria-controls="home" role="tab" data-toggle="tab">Profile</a></li>
             </ul>
             <div class="tab-content" id="tabContainer">
-                <div role="tabpanel" class="tab-pane active" id="dashboard">
-                    <iframe id="iDashBoard" src="@Url.Action("DashBoard","RegisteredHost")" width="100%" frameborder="0"></iframe>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="postContainer">
+                <div role="tabpanel" class="tab-pane active" id="postContainer">
                     <iframe id="iFrameContainer" src="@Url.Action("Profile", "RegisteredHost")" width="100%" frameborder="0"></iframe>
                 </div>
             </div>

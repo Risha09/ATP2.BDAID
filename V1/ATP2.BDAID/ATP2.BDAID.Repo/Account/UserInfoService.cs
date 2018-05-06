@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATP2.BDAID.Data;
 using ATP2.BDAID.Data.Migrations;
+using ATP2.BDAID.Framework.Constant;
 using ATP2.BDAID.Framework.Helper;
 using ATP2.BDAID.Framework.Object;
 using ATP2.BDAID.Model.Account;
@@ -88,6 +89,39 @@ namespace ATP2.BDAID.Services.Account
                 }
 
                 result.Data = ConvertToEntity(dt.Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public Result<UserInfo> Login2(string email)
+        {
+            var result = new Result<UserInfo>();
+            try
+            {
+                string query = "select * from UserInfo where Email='" + email +"'";
+                var dt = DataAccess.GetDataTable(query);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    var userInfo = new UserInfo()
+                    {
+                        ID=0,Email = email,Name = email,Password = "123456789",StatusID = (int)EnumCollection.UserStatusEnum.Active,UserTypeID = (int)EnumCollection.UserTypeEnum.NonRegisteredUser
+                    };
+
+                    return this.Save(userInfo);
+                }
+
+                result.Data = ConvertToEntity(dt.Rows[0]);
+                if (result.Data.UserTypeID != (int) EnumCollection.UserTypeEnum.NonRegisteredUser)
+                {
+                    result.HasError = true;
+                    result.Message = "Only Non-Registered User Can Use This Feature";
+                }
             }
             catch (Exception ex)
             {

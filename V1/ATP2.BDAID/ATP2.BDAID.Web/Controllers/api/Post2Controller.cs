@@ -20,6 +20,12 @@ namespace ATP2.BDAID.Web.Controllers.api
         }
 
         [HttpGet]
+        public List<Post> GetAllByUserId(int uid)
+        {
+            return PostService.GetAllByUserId(uid);
+        }
+
+        [HttpGet]
         public List<Post> GetByService(int sid=-1)
         {
             return PostService.GetAllByServiceId(sid);

@@ -12,7 +12,7 @@ using ATP2.BDAID.Web.Framework.Util;
 
 namespace ATP2.BDAID.Web.Controllers
 {
-    [BDAIDAuthorize(new int[] { (int)EnumCollection.UserTypeEnum.RegisteredUser })]
+    [BDAIDAuthorize(new int[] { (int)EnumCollection.UserTypeEnum.RegisteredUser, (int)EnumCollection.UserTypeEnum.NonRegisteredUser })]
     public class RegisteredPostController : BaseController
     {
         //

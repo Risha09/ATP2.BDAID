@@ -113,6 +113,7 @@ namespace ATP2.BDAID.Web.Controllers
             return View(model);
         }
 
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

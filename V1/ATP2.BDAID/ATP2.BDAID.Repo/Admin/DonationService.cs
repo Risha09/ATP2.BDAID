@@ -155,6 +155,7 @@ namespace ATP2.BDAID.Services.Admin
                 u.DonateDate = Convert.ToDateTime(row["DONATEDATE"].ToString());
                 u.Mobile = Int32.Parse(row["MOBILE"].ToString());
                 u.Transaction = Int32.Parse(row["TRANSACTION"].ToString());
+                u.Email = row["Email"].ToString();
                 return u;
             }
             catch (Exception ex)

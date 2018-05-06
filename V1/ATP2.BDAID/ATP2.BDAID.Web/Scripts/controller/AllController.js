@@ -630,3 +630,64 @@ app.controller('RegisteredDonationController', function ($scope, $http) {
 
     };
 });
+
+app.controller('RegisteredResponseController', function ($scope, $http) {
+
+    $scope.RootUrl = "";
+    $scope.ProcessingCount = 0;
+    $scope.UserID = 0;
+    $scope.SelectedPostID = -1;
+
+    //List Page
+
+    $scope.Init = function (url,uid) {
+
+        $scope.RootUrl = url;
+        $scope.UserID = uid;
+        $scope.LoadPosts();
+    };
+
+    $scope.LoadPosts = function () {
+
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/Post2/GetAllByUserId",
+            params: { uid: $scope.UserID }
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
+                $scope.PostList = response.data;
+                if ($scope.PostList.length > 0)
+                    $scope.SelectedPostID = $scope.PostList[0].ID;
+
+                $scope.LoadResponses();
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
+
+    };
+
+    $scope.LoadResponses = function () {
+
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/Donation2/GetByPostID",
+            params: { pid: $scope.SelectedPostID }
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
+                $scope.ResponseList = response.data;
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
+
+    };
+});

@@ -12,12 +12,22 @@ using ATP2.BDAID.Web.Framework.Util;
 
 namespace ATP2.BDAID.Web.Controllers
 {
-    [BDAIDAuthorize(new int[] { (int)EnumCollection.UserTypeEnum.RegisteredUser })]
+    [BDAIDAuthorize(new int[] { (int)EnumCollection.UserTypeEnum.RegisteredUser, (int)EnumCollection.UserTypeEnum.NonRegisteredUser })]
     public class RegisteredHostController : BaseController
     {
         //
         // GET: /RegisteredUser/Host/
         public ActionResult Index(int id=-1)
+        {
+            if (id == -1)
+                id = 1;
+
+            ViewBag.ID = id;
+            ViewBag.Services = ServiceTypeService.GetAll();
+            return View();
+        }
+
+        public ActionResult Index2(int id = -1)
         {
             if (id == -1)
                 id = 1;
