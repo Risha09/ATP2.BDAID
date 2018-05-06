@@ -15,5 +15,6 @@ namespace ATP2.BDAID.Services2.Interfaces
     {
         Result<UserInfo> Login(string email, string password);
         Result<UserInfo> Login2(string email);
+        List<UserInfo> GetAllByTypeID(int typeID);
     }
 }

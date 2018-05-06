@@ -20,7 +20,7 @@ namespace ATP2.BDAID.Entities
         public string Address { get; set; }
         [Required]
         public string Gender { get; set; }
-        public int RefID { get; set; }
+        public int? RefID { get; set; }
 
         public UserInfo UserInfo { get; set; }
     }

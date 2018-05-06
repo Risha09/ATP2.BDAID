@@ -155,6 +155,30 @@ namespace ATP2.BDAID.Services.Account
             return result;
         }
 
+        public List<UserInfo> GetAllByTypeID(int typeID)
+        {
+            var result = new List<UserInfo>();
+            try
+            {
+                string query = "select * from UserInfo where USERTYPEID="+typeID;
+                var dt = DataAccess.GetDataTable(query);
+
+                if (dt != null && dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        UserInfo u = ConvertToEntity(dt.Rows[i]);
+                        result.Add(u);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
         public Result<UserInfo> GetByID(int id)
         {
             var result = new Result<UserInfo>();

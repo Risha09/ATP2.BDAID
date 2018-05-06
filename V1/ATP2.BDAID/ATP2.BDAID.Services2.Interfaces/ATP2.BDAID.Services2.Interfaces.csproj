@@ -42,6 +42,7 @@
     <Compile Include="IBaseService.cs" />
     <Compile Include="IDonationService.cs" />
     <Compile Include="IEmployeeService.cs" />
+    <Compile Include="IMessageService.cs" />
     <Compile Include="IPostCommentService.cs" />
     <Compile Include="IPostService.cs" />
     <Compile Include="IReg_UserService.cs" />

@@ -1,0 +1,67 @@
+﻿@model ATP2.BDAID.Entities.Reg_User
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+@using (Html.BeginForm("EditProfile"))
+{
+    <br />
+    if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Oh snap!</strong> @ViewBag.Message
+        </div>
+        <br />
+    }
+
+    <button type="submit" class="btn btn-info btn-sm">Save</button><br /><br />
+    <table class="table table-striped table-hover">
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.ID) </td>
+            <td>
+                @Html.TextBoxFor(m => m.ID, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.ID)
+            </td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.DOB) </td>
+            <td>
+                @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.DOB)
+            </td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.Gender) </td>
+            <td>
+                @Html.RadioButtonFor(m => m.Gender, "Male")&nbsp;Male &nbsp;&nbsp;
+                @Html.RadioButtonFor(m => m.Gender, "Female")&nbsp;Female
+                @Html.ValidationMessageFor(m => m.Gender)
+            </td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.Contact) </td>
+            <td>
+                @Html.TextBoxFor(m => m.Contact, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Contact)
+            </td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.Profession) </td>
+            <td>
+                @Html.TextBoxFor(m => m.Profession, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Profession)
+            </td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-tasks" aria-hidden="true"> &nbsp; </span> @Html.LabelFor(m => m.Address) </td>
+            <td>
+                @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address)
+            </td>
+        </tr>
+
+    </table>
+}
+
+

@@ -44,7 +44,37 @@ namespace ATP2.BDAID.Web.Controllers
             return View(model);
         }
 
+        public ActionResult EditProfile()
+        {
+            var model = new Reg_User(){ID = HttpUtil.UserProfile.ID,DOB = DateTime.Now};
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(Reg_User model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = Reg_UserService.Save(model);
+
+            if (result.HasError)
+            {
+                ViewBag.Message = result.Message;
+                return View(model);
+            }
+
+            return RedirectToAction("Profile");
+        }
+
         public ActionResult DashBoard()
+        {
+            return View();
+        }
+
+        public ActionResult MessageIndex()
         {
             return View();
         }

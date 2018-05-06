@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Donation.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostComment.cs" />
     <Compile Include="Reg_User.cs" />

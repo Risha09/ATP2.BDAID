@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\UserInfoService.cs" />
+    <Compile Include="Admin\MessageService.cs" />
     <Compile Include="Admin\PostService.cs" />
     <Compile Include="Admin\EmployeeService.cs" />
     <Compile Include="Admin\Reg_UserService.cs" />

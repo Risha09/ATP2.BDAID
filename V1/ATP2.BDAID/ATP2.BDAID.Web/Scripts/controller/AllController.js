@@ -419,7 +419,7 @@ app.controller('RegisteredPostController', function ($scope, $http) {
         var x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
-        
+
         $scope.ProcessingCount++;
         $http({
             method: "GET",
@@ -607,7 +607,7 @@ app.controller('RegisteredDonationController', function ($scope, $http) {
 
         $scope.RootUrl = url;
         $scope.UserID = id;
-        
+
         $scope.Load();
     };
 
@@ -640,7 +640,7 @@ app.controller('RegisteredResponseController', function ($scope, $http) {
 
     //List Page
 
-    $scope.Init = function (url,uid) {
+    $scope.Init = function (url, uid) {
 
         $scope.RootUrl = url;
         $scope.UserID = uid;
@@ -688,6 +688,112 @@ app.controller('RegisteredResponseController', function ($scope, $http) {
                 alert(response.statusText);
             }
         );
+
+    };
+});
+
+app.controller('MessageController', function ($scope, $http) {
+
+    $scope.RootUrl = "";
+    $scope.ProcessingCount = 0;
+    $scope.UserID = 0;
+    $scope.SelectedPostID = -1;
+    $scope.CurrentUser = "";
+    $scope.MessageList = [];
+    $scope.SelectedIndex = -1;
+    $scope.LoadMessages = "";
+    $scope.messages = "";
+    //List Page
+
+    $scope.Init = function (url, email) {
+
+        $scope.RootUrl = url;
+        $scope.CurrentUser = email;
+        $scope.LoadUsers();
+
+        //window.setTimeout(LoadMessages, 1000);
+    };
+
+    $scope.ChangeRow = function (index) {
+
+        if ($scope.SelectedIndex == index)
+            return;
+
+        $scope.SelectedIndex = index;
+        $scope.LoadMessages();
+    }
+
+    $scope.LoadMessages = function () {
+
+        $scope.MessageList = [];
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/Message2/GetMessages",
+            params: { receiver: $scope.UserList[$scope.SelectedIndex].Email }
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
+                $scope.MessageList = response.data;
+                
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
+
+    };
+
+    $scope.LoadUsers = function () {
+
+        $scope.ProcessingCount++;
+        $http({
+            method: "GET",
+            url: $scope.RootUrl + "api/UserInfo2/GetAllRegisteredUser",
+        }).then(
+            function mySuccess(response) {
+                $scope.ProcessingCount--;
+                $scope.UserList = response.data;
+                
+            },
+            function myError(response) {
+                $scope.ProcessingCount--;
+                alert(response.statusText);
+            }
+        );
+
+    };
+
+    $scope.Send = function () {
+
+        if ($scope.messages == '') {
+            alert('Invalid Message');
+            return;
+        }
+
+        if ($scope.SelectedIndex == -1)
+            return;
+
+        var message = { MESSAGES: $scope.messages, ReceiverEmail: $scope.UserList[$scope.SelectedIndex].Email };
+
+        $scope.ProcessingCount++;
+        $http.post($scope.RootUrl + "api/Message2/Send", message, { headers: { 'Content-Type': 'application/json' } })
+            .then(function (response) {
+                $scope.ProcessingCount--;
+                var result = response.data;
+
+                if (result.HasError) {
+                    alert(result.Message);
+                    return;
+                }
+                $scope.messages = "";
+                $scope.LoadMessages();
+
+            }, function (response) {
+                $scope.ProcessingCount--;
+                alert('error');
+            });
 
     };
 });

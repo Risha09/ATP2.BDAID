@@ -48,7 +48,63 @@ namespace ATP2.BDAID.Services.Admin
 
         public Result<Reg_User> Save(Reg_User value)
         {
-            throw new NotImplementedException();
+            var result = new Result<Reg_User>();
+
+            try
+            {
+                string query = "select * from Reg_User where ID=" + value.ID;
+                var dt = DataAccess.GetDataTable(query);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    query = "insert into Reg_User values(" + value.ID + ",'" + value.Address + "','" + value.Contact + "','" + value.Profession + "',TO_DATE('" + value.DOB.ToString("yyyy/MM/dd") + "', 'yyyy/mm/dd'),'" + value.Gender + "',111)";
+                }
+                else
+                {
+                    result.HasError = true;
+                    result.Message = "Update not implemented yet";
+                    return result;
+                }
+
+                if (!IsValid(value, result))
+                {
+                    return result;
+                }
+
+                result.HasError = DataAccess.ExecuteQuery(query) <= 0;
+
+                if (result.HasError)
+                    result.Message = "Something Went Wrong";
+                else
+                {
+                    result.Data = value;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        private bool IsValid(Reg_User value, Result<Reg_User> result)
+        {
+            if (!ValidationHelper.IsStringValid(value.Contact))
+            {
+                result.HasError = true;
+                result.Message = "Invalid Contact";
+                return true;
+            }
+            if (!ValidationHelper.IsStringValid(value.Profession))
+            {
+                result.HasError = true;
+                result.Message = "Invalid Profession";
+                return true;
+            }
+
+            return true;
         }
 
         public List<Reg_User> GetAll()

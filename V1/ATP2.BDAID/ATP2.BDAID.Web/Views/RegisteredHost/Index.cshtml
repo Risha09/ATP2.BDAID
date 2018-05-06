@@ -8,6 +8,8 @@
     Layout = "~/Views/Shared/_RUAuthorizeLayout.cshtml";
     var services = (List<Service>) ViewBag.Services;
     int tid = (int) ViewBag.ID;
+    string mClass = tid == 1 ? "active" : "";
+    string cClass = tid == 2 ? "active" : "";
 }
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -36,8 +38,8 @@
                         }
                     </ul>
                 </li>
-                <li><a href="@Url.Action("Index","RegisteredHost",new{id=1})">Mugger</a></li>
-                <li><a href="@Url.Action("Index","RegisteredHost",new{id=2})">Collaborator</a></li>
+                <li class="@mClass"><a href="@Url.Action("Index","RegisteredHost",new{id=1})">Mugger</a></li>
+                <li class="@cClass"><a href="@Url.Action("Index","RegisteredHost",new{id=2})">Collaborator</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li> @Html.ActionLink("Welcome, " + HttpUtil.UserProfile.Name, "Index", "RegisteredHost")</li>
@@ -64,7 +66,7 @@
                     <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Donations","RegisteredPost")', 'Donations')">Donations</a>
                 }
 
-                @*<a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("Profile","Adminhost")','Message')">Message Box</a>*@
+                <a class="list-group-item" href="#" onclick="ChangeIframe('@Url.Action("MessageIndex","RegisteredHost")','Message')">Message Box</a>
             </div>
         </div>
         <div class="col-md-9">

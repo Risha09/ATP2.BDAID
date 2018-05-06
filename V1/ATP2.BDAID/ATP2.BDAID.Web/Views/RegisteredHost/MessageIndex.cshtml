@@ -1,0 +1,65 @@
+﻿@using ATP2.BDAID.Web.Framework.Util
+
+@{
+    ViewBag.Title = "MessageIndex";
+    Layout = "~/Views/Shared/_InnerLayout.cshtml";
+}
+
+<br/>
+<div class="row" ng-controller="MessageController" ng-init="Init('@Url.Content("~/")','@HttpUtil.UserProfile.Email')">
+    <div ng-show="ProcessingCount>0">
+        Loading....
+    </div>
+    <div class="col-md-3" style="overflow-y: auto;border: 1px solid darkgray;height: 470px">
+        <table class="table table-hover" style="width: 100%">
+            <tr ng-repeat="user in UserList" ng-click="ChangeRow($index)" ng-class="{'selectedRow': $index == SelectedIndex}" style="cursor: pointer">
+                <td>
+                    <b>{{user.Name}}</b><br />
+                    {{user.Email}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-9" style="overflow-y: auto;border: 1px solid darkgray;height: 470px">
+        <table class="table table-striped" style="width: 100%">
+            <tr ng-repeat="message in MessageList" ng-show="MessageList.length>0">
+                <td style="width: 15%">
+                    <b ng-show="message.ReceiverEmail==CurrentUser">{{message.SenderEmail}}</b>
+                </td>
+                <td style="width: 70%">
+                    <p ng-show="message.SenderEmail==CurrentUser" class="text-right">
+                        {{message.Messages}}
+                        <br />
+                        <small>{{message.Duration}}</small>
+                    </p>
+                    <p ng-show="message.ReceiverEmail==CurrentUser" class="text-left">
+                        {{message.Messages}}
+                        <br />
+                        <small>{{message.Duration}}</small>
+                    </p>
+                </td>
+                <td style="width: 15%">
+                    <b ng-show="message.SenderEmail==CurrentUser">You</b>
+                </td>
+            </tr>
+            <tr ng-show="SelectedIndex!=-1">
+                <td style="width: 15%">
+                    Message
+                </td>
+                <td colspan="2">
+                    <textarea class="form-control" placeholder="Message" ng-model="messages"></textarea>
+                    <input type="button" class="btn btn-info btn-sm" value="Send" ng-click="Send()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<style>
+    .selectedRow {
+        background-color: gray;
+    }
+</style>
+
+
+

@@ -33,6 +33,7 @@ namespace ATP2.BDAID.Web
             container.RegisterType<IReg_UserService, Reg_UserService>();
             container.RegisterType<IServiceAuditService, ServiceAuditService>();
             container.RegisterType<IServiceTypeService, ServiceTypeService>();
+            container.RegisterType<IMessageService, MessageService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

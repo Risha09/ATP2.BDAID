@@ -9,6 +9,7 @@ namespace ATP2.BDAID.Entities
 {
     public class Donation
     {
+        
         public int ID { get; set; }
         public DateTime DonateDate { get; set; }
         public string Type { get; set; }

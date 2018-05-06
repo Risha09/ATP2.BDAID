@@ -173,6 +173,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\Donation2Controller.cs" />
+    <Compile Include="Controllers\api\Message2Controller.cs" />
+    <Compile Include="Controllers\api\UserInfo2Controller.cs" />
     <Compile Include="Controllers\api\PostComment2Controller.cs" />
     <Compile Include="Controllers\RegisteredPostController.cs" />
     <Compile Include="Controllers\RegisteredHostController.cs" />
@@ -279,6 +281,8 @@
     <Content Include="Views\AdminService\Reports.cshtml" />
     <Content Include="Views\RegisteredPost\NewDonation.cshtml" />
     <Content Include="Views\RegisteredHost\Index2.cshtml" />
+    <Content Include="Views\RegisteredHost\MessageIndex.cshtml" />
+    <Content Include="Views\RegisteredHost\EditProfile.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

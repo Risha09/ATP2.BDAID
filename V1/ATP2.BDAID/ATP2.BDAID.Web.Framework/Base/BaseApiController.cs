@@ -109,5 +109,16 @@ namespace ATP2.BDAID.Web.Framework.Base
                 return DependencyResolver.Current.GetService<IServiceAuditService>();
             }
         }
+
+        public static IMessageService MessageService
+        {
+            get
+            {
+                //if (_ServiceAuditService == null)
+                //    _ServiceAuditService = new ServiceAuditService();
+                //return _ServiceAuditService;
+                return DependencyResolver.Current.GetService<IMessageService>();
+            }
+        }
     }
 }
